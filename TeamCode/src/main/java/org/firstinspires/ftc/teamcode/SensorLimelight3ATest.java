@@ -138,7 +138,7 @@ public class SensorLimelight3ATest extends LinearOpMode {
                 List<LLResultTypes.FiducialResult> fiducialResults = result.getFiducialResults();
                 for (LLResultTypes.FiducialResult fr : fiducialResults) {
                     telemetry.addData("Fiducial", "ID: %d, Family: %s, X: %.2f, Y: %.2f", fr.getFiducialId(), fr.getFamily(), fr.getTargetXDegrees(), fr.getTargetYDegrees());
-                    telemetry.addData("Distance", result.getBotpose().getPosition().z);
+                    telemetry.addData("Distance", fr.getCameraPoseTargetSpace().getPosition().z);
                 }
 
                 // Access color results
