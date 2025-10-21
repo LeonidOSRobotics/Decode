@@ -8,6 +8,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
+
+import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+
 import java.util.Comparator;
 import java.util.List;
 
@@ -15,16 +18,16 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class IntegratedVersion extends LinearOpMode {
 
-    private static final double DESIRED_DISTANCE = 12.0;
+    private static final double DESIRED_DISTANCE = 50.0;
     private static final double SPEED_GAIN  = 0.02;
-    private static final double STRAFE_GAIN = 0.015;
-    private static final double TURN_GAIN   = 0.01;
+    private static final double STRAFE_GAIN = 0.1;
+    private static final double TURN_GAIN   = 0.05;
 
     private static final double MAX_AUTO_SPEED  = 0.5;
     private static final double MAX_AUTO_STRAFE = 0.5;
     private static final double MAX_AUTO_TURN   = 0.3;
 
-    private static final int DESIRED_TAG_ID = -1;
+    private static final int DESIRED_TAG_ID = 20;
     private static final double M_TO_IN = 39.3701;
 
     private DcMotor frontLeftDrive;
@@ -32,16 +35,18 @@ public class IntegratedVersion extends LinearOpMode {
     private DcMotor backLeftDrive;
     private DcMotor backRightDrive;
 
+    private AprilTagProcessor aprilTag;
+
     @Override
     public void runOpMode() {
         double drive;
         double strafe;
         double turn;
 
-        frontLeftDrive  = hardwareMap.get(DcMotor.class, "front_left_drive");
-        frontRightDrive = hardwareMap.get(DcMotor.class, "front_right_drive");
-        backLeftDrive   = hardwareMap.get(DcMotor.class, "back_left_drive");
-        backRightDrive  = hardwareMap.get(DcMotor.class, "back_right_drive");
+        frontLeftDrive  = hardwareMap.get(DcMotor.class, "leftFront");
+        frontRightDrive = hardwareMap.get(DcMotor.class, "rightFront");
+        backLeftDrive   = hardwareMap.get(DcMotor.class, "leftBack");
+        backRightDrive  = hardwareMap.get(DcMotor.class, "rightBack");
 
         frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
         backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -83,8 +88,8 @@ public class IntegratedVersion extends LinearOpMode {
                             desired.getFiducialId(), rangeIn, headingError, lateralIn);
 
                     if (gamepad1.left_bumper) {
-                        drive  = Range.clip(rangeError   * SPEED_GAIN,  -MAX_AUTO_SPEED,  MAX_AUTO_SPEED);
-                        turn   = Range.clip(headingError * TURN_GAIN,   -MAX_AUTO_TURN,   MAX_AUTO_TURN);
+                        drive  = 0;// Range.clip(rangeError   * SPEED_GAIN,  -MAX_AUTO_SPEED,  MAX_AUTO_SPEED);
+                        turn   = Range.clip(headingError * -TURN_GAIN,   -MAX_AUTO_TURN,   MAX_AUTO_TURN);
                         strafe = Range.clip(lateralIn    * STRAFE_GAIN, -MAX_AUTO_STRAFE, MAX_AUTO_STRAFE);
                         telemetry.addData("Auto", "Drive %5.2f, Strafe %5.2f, Turn %5.2f ", drive, strafe, turn);
                     } else {
