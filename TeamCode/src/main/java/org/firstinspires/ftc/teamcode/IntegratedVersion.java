@@ -35,7 +35,11 @@ public class IntegratedVersion extends LinearOpMode {
     private DcMotor backLeftDrive;
     private DcMotor backRightDrive;
 
+    private Robot robot;
+
     private AprilTagProcessor aprilTag;
+
+
 
     @Override
     public void runOpMode() {
@@ -47,6 +51,9 @@ public class IntegratedVersion extends LinearOpMode {
         frontRightDrive = hardwareMap.get(DcMotor.class, "rightFront");
         backLeftDrive   = hardwareMap.get(DcMotor.class, "leftBack");
         backRightDrive  = hardwareMap.get(DcMotor.class, "rightBack");
+
+        robot = new Robot();
+        robot.init(hardwareMap);
 
         frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
         backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -88,7 +95,12 @@ public class IntegratedVersion extends LinearOpMode {
                             desired.getFiducialId(), rangeIn, headingError, lateralIn);
 
                     if (gamepad1.left_bumper) {
-                        drive  = 0;// Range.clip(rangeError   * SPEED_GAIN,  -MAX_AUTO_SPEED,  MAX_AUTO_SPEED);
+
+                        //drive  = robot.calculateAutoDrive(rangeError);
+                        //turn   = robot.calculateAutoTurn(headingError);
+                        //strafe = robot.calculateAutoStrafe(lateralIn);
+
+                        drive  = Range.clip(rangeError   * SPEED_GAIN,  -MAX_AUTO_SPEED,  MAX_AUTO_SPEED);
                         turn   = Range.clip(headingError * -TURN_GAIN,   -MAX_AUTO_TURN,   MAX_AUTO_TURN);
                         strafe = Range.clip(lateralIn    * STRAFE_GAIN, -MAX_AUTO_STRAFE, MAX_AUTO_STRAFE);
                         telemetry.addData("Auto", "Drive %5.2f, Strafe %5.2f, Turn %5.2f ", drive, strafe, turn);
