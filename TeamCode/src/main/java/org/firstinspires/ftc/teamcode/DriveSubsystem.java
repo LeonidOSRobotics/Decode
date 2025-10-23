@@ -9,6 +9,12 @@ public class DriveSubsystem {
         this.hardware = hardware;
         this.vision = vision;
     }
+    public void stopDriveTrain() {
+        hardware.getLeftBack().setPower(0);
+        hardware.getRightBack().setPower(0);
+        hardware.getLeftFront().setPower(0);
+        hardware.getRightFront().setPower(0);
+    }
 }
 
 
