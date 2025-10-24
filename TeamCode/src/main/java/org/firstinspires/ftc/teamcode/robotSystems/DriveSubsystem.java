@@ -1,4 +1,11 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.robotSystems;
+
+/*
+ * This class subsystem is where the robot is told how to perform drive
+ * related functions. It uses the robotHardware class to access the actual
+ * hardware of the robot.
+ */
+
 
 public class DriveSubsystem {
 

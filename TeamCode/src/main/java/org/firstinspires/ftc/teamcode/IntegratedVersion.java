@@ -53,7 +53,7 @@ public class IntegratedVersion extends LinearOpMode {
         backRightDrive  = hardwareMap.get(DcMotor.class, "rightBack");
 
         robot = new Robot();
-        robot.init(hardwareMap);
+        robot.initRobot(hardwareMap);
 
         frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
         backLeftDrive.setDirection(DcMotor.Direction.REVERSE);

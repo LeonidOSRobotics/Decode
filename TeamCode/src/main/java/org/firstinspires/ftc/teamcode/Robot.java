@@ -1,16 +1,28 @@
 package org.firstinspires.ftc.teamcode;
-import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.hardware.limelightvision.Limelight3A;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.util.ElapsedTime;
+import org.firstinspires.ftc.teamcode.robotSystems.*;
+
+/*
+ * This class is the “hub” that wires everything together for an OpMode.
+ * It holds one instance of RobotHardware and creates all subsystems using it.
+ */
+
 
 public class Robot {
-    protected ElapsedTime period = new ElapsedTime();
-    public ElapsedTime getPeriod() {
-        return period;
-    }
-    public Robot() {
+    RobotHardware hardware;
+    VisionSubsystem vision;
+    DriveSubsystem driveTrain;
+
+
+    public void initRobot(HardwareMap hwMap){
+        //Creates and initializes the shared hardware for the robot
+        hardware = new RobotHardware();
+        hardware.init(hwMap);
+
+        //Initializes the individual subsystems for the robot
+        vision = new VisionSubsystem(hardware);
+        driveTrain = new DriveSubsystem(hardware, vision);
+
     }
 }

@@ -1,14 +1,27 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.robotSystems;
 
 import com.qualcomm.robotcore.util.Range;
 
+/*
+ * This class subsystem is where the robot is told how to perform vision
+ * related functions. It uses the robotHardware class to access the actual
+ * hardware of the robot.
+ */
+
 public class VisionSubsystem {
+
+    RobotHardware hardware;
     private static final double MAX_AUTO_SPEED = 0.5;
     private static final double MAX_AUTO_STRAFE = 0.5;
     private static final double MAX_AUTO_TURN = 0.3;
     private static final double SPEED_GAIN = 0.02;
     private static final double STRAFE_GAIN = 0.1;
     private static final double TURN_GAIN = 0.05;
+
+    public VisionSubsystem(RobotHardware hardware) {
+        this.hardware = hardware;
+    }
+
     public double calculateAutoDrive(double rangeError) {
         return Range.clip(rangeError * SPEED_GAIN, -MAX_AUTO_SPEED, MAX_AUTO_SPEED);
     }
