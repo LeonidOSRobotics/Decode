@@ -19,8 +19,9 @@ public class SampleTeleOp extends LinearOpMode {
         waitForStart();
         while (opModeIsActive()) {
 
-            if(bumberpress){
-            robot.driveTrain.sautaline();
+            // if(bumberpress){
+            //  robot.driveTrain.sautaline();
+            //}
         }
     }
 }

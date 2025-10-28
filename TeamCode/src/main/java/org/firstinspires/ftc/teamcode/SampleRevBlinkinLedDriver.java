@@ -77,6 +77,8 @@ public class SampleRevBlinkinLedDriver extends OpMode {
         AUTO
     }
 
+
+
     @Override
     public void init()
     {
@@ -125,19 +127,13 @@ public class SampleRevBlinkinLedDriver extends OpMode {
         }
 
         if (gamepad1.a) {
-            setDisplayKind(DisplayKind.MANUAL);
-            gamepadRateLimit.reset();
+            setBlue();
         } else if (gamepad1.b) {
-            setDisplayKind(DisplayKind.AUTO);
-            gamepadRateLimit.reset();
-        } else if ((displayKind == DisplayKind.MANUAL) && (gamepad1.left_bumper)) {
-            pattern = pattern.previous();
-            displayPattern();
-            gamepadRateLimit.reset();
-        } else if ((displayKind == DisplayKind.MANUAL) && (gamepad1.right_bumper)) {
-            pattern = pattern.next();
-            displayPattern();
-            gamepadRateLimit.reset();
+            setRed();
+        } else if (gamepad1.y){
+            setLaunch();
+        } else if (gamepad1.x){
+            setOff();
         }
     }
 
@@ -166,7 +162,7 @@ public class SampleRevBlinkinLedDriver extends OpMode {
 
 
 
-    private void setRed () {
+        private void setRed () {
         pattern = RevBlinkinLedDriver.BlinkinPattern.SHOT_RED;
         blinkinLedDriver.setPattern(pattern);
     }
