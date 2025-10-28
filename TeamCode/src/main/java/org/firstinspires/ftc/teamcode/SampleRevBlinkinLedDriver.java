@@ -100,13 +100,6 @@ public class SampleRevBlinkinLedDriver extends OpMode {
     {
         handleGamepad();
 
-        if (displayKind == DisplayKind.AUTO) {
-            doAutoDisplay();
-        } else {
-            /*
-             * MANUAL mode: Nothing to do, setting the pattern as a result of a gamepad event.
-             */
-        }
     }
 
     /*
@@ -137,32 +130,9 @@ public class SampleRevBlinkinLedDriver extends OpMode {
         }
     }
 
-    protected void setDisplayKind(DisplayKind displayKind)
-    {
-        this.displayKind = displayKind;
-        display.setValue(displayKind.toString());
-    }
-
-    protected void doAutoDisplay()
-    {
-        if (ledCycleDeadline.hasExpired()) {
-            pattern = pattern.next();
-            displayPattern();
-            ledCycleDeadline.reset();
-        }
-    }
-
-    protected void displayPattern()
-    {
-        blinkinLedDriver.setPattern(pattern);
-        patternName.setValue(pattern.toString());
-    }
 
 
-
-
-
-        private void setRed () {
+    private void setRed () {
         pattern = RevBlinkinLedDriver.BlinkinPattern.SHOT_RED;
         blinkinLedDriver.setPattern(pattern);
     }
