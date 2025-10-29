@@ -42,10 +42,26 @@ public class DriveSubsystem {
         double backRightPower = (y + x - rotate) * dampening;
 
         //Set Power
-        leftFront.setPower(frontLeftPower);
-        rightFront.setPower(frontRightPower);
-        leftBack.setPower(backLeftPower);
-        rightBack.setPower(backRightPower);
+        hardware.getLeftBack().setPower(backLeftPower);
+        hardware.getLeftFront().setPower(frontLeftPower);
+        hardware.getRightBack().setPower(backRightPower);
+        hardware.getRightFront().setPower(frontRightPower);
+    }
+    public void drive(double forward, double strafe, double rotate) {
+        double y = forward;
+        double x = strafe;
+
+        //Calculating the power for the wheels
+        double frontLeftPower = (y + x + rotate);
+        double backLeftPower = (y - x + rotate);
+        double frontRightPower = (y - x - rotate);
+        double backRightPower = (y + x - rotate);
+
+        //Set Power
+        hardware.getLeftBack().setPower(backLeftPower);
+        hardware.getLeftFront().setPower(frontLeftPower);
+        hardware.getRightBack().setPower(backRightPower);
+        hardware.getRightFront().setPower(frontRightPower);
     }
 
 }
