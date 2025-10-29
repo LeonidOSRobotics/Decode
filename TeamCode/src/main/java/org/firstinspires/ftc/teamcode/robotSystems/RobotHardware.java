@@ -4,6 +4,7 @@ import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 
 /*
  * This class is where we identify the physical components of the robot
@@ -24,6 +25,7 @@ public class RobotHardware {
     private DcMotor rightFront = null;
     private DcMotor leftBack = null;
     private DcMotor rightBack = null;
+    private RevBlinkinLedDriver blinkin = null;
 
     public static final double M_TO_IN = 39.3701;
     public static final double DESIRED_DISTANCE_IN = 50.0;
@@ -84,5 +86,9 @@ public class RobotHardware {
     //Getters for VisionSubsystem
     public Limelight3A getCamera() {
         return camera;
+    }
+
+    public RevBlinkinLedDriver getBlinkin() {
+        return blinkin;
     }
 }
