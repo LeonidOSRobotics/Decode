@@ -25,6 +25,11 @@ public class RobotHardware {
     private DcMotor leftBack = null;
     private DcMotor rightBack = null;
 
+    public static final double M_TO_IN = 39.3701;
+    public static final double DESIRED_DISTANCE_IN = 50.0;
+    public static final int DESIRED_TAG_ID = 20;
+
+
 
     public void init(HardwareMap ahwMap) {
         hwMap = ahwMap;
@@ -44,7 +49,19 @@ public class RobotHardware {
         leftBack.setDirection(DcMotorSimple.Direction.FORWARD);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+    }
 
+    public void startCamera(){
+        if (camera != null) {
+            camera.pipelineSwitch(0);
+            camera.start();
+        }
+    }
+
+    public void stopCamera(){
+        if (camera != null) {
+            camera.stop();
+        }
     }
 
     //Getters for DriveSubsystem motors

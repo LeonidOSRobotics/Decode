@@ -1,5 +1,12 @@
 package org.firstinspires.ftc.teamcode.robotSystems;
 
+import com.qualcomm.hardware.limelightvision.LLResult;
+import com.qualcomm.hardware.limelightvision.LLResultTypes;
+
+import java.util.Comparator;
+import java.util.List;
+
+
 import com.qualcomm.robotcore.util.Range;
 
 /*
@@ -18,6 +25,8 @@ public class VisionSubsystem {
     private static final double STRAFE_GAIN = 0.1;
     private static final double TURN_GAIN = 0.05;
 
+    private static final int DESIRED_TAG_ID = 20;
+
     public VisionSubsystem(RobotHardware hardware) {
         this.hardware = hardware;
     }
@@ -32,5 +41,19 @@ public class VisionSubsystem {
 
     public double calculateAutoStrafe(double lateralIn) {
         return Range.clip(lateralIn * STRAFE_GAIN, -MAX_AUTO_STRAFE, MAX_AUTO_STRAFE);
+    }
+
+    public LLResultTypes.FiducialResult selectDesiredTag(List<LLResultTypes.FiducialResult>list){
+        if (list == null || list.isEmpty()) return null;
+        if (DESIRED_TAG_ID >= 0){
+            return list.stream()
+                    .filter(fr -> fr.getFiducialId() == DESIRED_TAG_ID)
+                    .min(Comparator.comparingDouble(fr -> Math.abs(fr.getCameraPoseTargetSpace().getPosition().z)))
+                    .orElse(null);
+        }
+        return list.stream()
+                .min(Comparator.comparingDouble(fr -> Math.abs(fr.getCameraPoseTargetSpace().getPosition().z)))
+                .orElse(null);
+
     }
 }
