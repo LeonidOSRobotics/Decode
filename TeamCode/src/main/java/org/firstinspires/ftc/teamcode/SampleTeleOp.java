@@ -1,13 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 
 /*
  * This class serves as a sample teleOp the both test the ability of the
  * organization system to build and also provides a template for future op modes
  */
-
+@TeleOp(name = "Sample TeleOp", group = "Sensor")
 public class SampleTeleOp extends LinearOpMode {
     private Robot robot = new Robot();
 
