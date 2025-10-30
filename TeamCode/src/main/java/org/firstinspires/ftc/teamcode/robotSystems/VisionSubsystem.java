@@ -16,6 +16,8 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 public class VisionSubsystem {
+    LLResult result;
+    LLResultTypes.FiducialResult desired;
 
     RobotHardware hardware;
     private static final double MAX_AUTO_SPEED = 0.5;
@@ -29,6 +31,8 @@ public class VisionSubsystem {
 
     public VisionSubsystem(RobotHardware hardware) {
         this.hardware = hardware;
+        hardware.getCamera().getLatestResult();
+        desired = selectDesiredTag(result.getFiducialResults());
     }
 
     public double calculateAutoDrive(double rangeError) {
@@ -56,4 +60,12 @@ public class VisionSubsystem {
                 .orElse(null);
 
     }
+    public int getTagID() {
+        hardware.getCamera().getLatestResult();
+        desired = selectDesiredTag(result.getFiducialResults());
+        return desired.getFiducialId();
+    }
+
+
+
 }

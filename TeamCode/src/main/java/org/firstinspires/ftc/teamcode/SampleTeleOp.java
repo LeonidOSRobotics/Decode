@@ -29,6 +29,9 @@ public class SampleTeleOp extends LinearOpMode {
                 robot.LED.setOff();
 
             }
+            telemetry.addData("ID",robot.vision.getTagID());
+            telemetry.update();
+
         }
 
     }
