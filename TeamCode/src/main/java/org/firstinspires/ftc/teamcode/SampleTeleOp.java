@@ -18,10 +18,17 @@ public class SampleTeleOp extends LinearOpMode {
 
         waitForStart();
         while (opModeIsActive()) {
+            if (gamepad1.x) {
+                robot.LED.setBlue();
+            }
+            else if (gamepad1.b) {
+                robot.LED.setRed();
+            }
+            else if (gamepad1.y) {
+                robot.LED.setOff();
 
-            // if(bumberpress){
-            //  robot.driveTrain.sautaline();
-            //}
+            }
         }
+
     }
 }

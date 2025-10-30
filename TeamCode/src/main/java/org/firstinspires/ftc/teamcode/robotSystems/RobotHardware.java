@@ -41,6 +41,7 @@ public class RobotHardware {
         rightBack = hwMap.get(DcMotor.class, "rightBack");
 
         camera = hwMap.get(Limelight3A.class, "limelight");
+        blinkin = hwMap.get(RevBlinkinLedDriver.class, "blinkin");
 
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

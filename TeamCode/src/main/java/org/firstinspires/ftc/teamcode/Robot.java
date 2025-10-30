@@ -13,6 +13,8 @@ public class Robot {
     RobotHardware hardware;
     VisionSubsystem vision;
     DriveSubsystem driveTrain;
+    LEDSubsystem LED;
+
 
 
     public void initRobot(HardwareMap hwMap){
@@ -23,6 +25,6 @@ public class Robot {
         //Initializes the individual subsystems for the robot
         vision = new VisionSubsystem(hardware);
         driveTrain = new DriveSubsystem(hardware, vision);
-
+        LED = new LEDSubsystem(hardware);
     }
 }
