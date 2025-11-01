@@ -73,6 +73,14 @@ public class DriveSubsystem {
         return Range.clip(lateralError * STRAFE_GAIN, -MAX_AUTO_STRAFE, MAX_AUTO_STRAFE);
     }
 
+    /**
+     * When a tag is visible causes the robot to line up with the
+     * tag in regards to the robots heading and strafe
+     */
+    public void autoAlignment(){
+        
+    }
+
 }
 
 
