@@ -7,10 +7,20 @@ package org.firstinspires.ftc.teamcode.robotSystems;
  */
 
 
+import com.qualcomm.robotcore.util.Range;
+
 public class DriveSubsystem {
 
     RobotHardware hardware;
     VisionSubsystem vision;
+
+    //Variables for Autoalignment
+    private static final double MAX_AUTO_SPEED = 0.5;
+    private static final double MAX_AUTO_STRAFE = 0.5;
+    private static final double MAX_AUTO_TURN = 0.3;
+    private static final double SPEED_GAIN = 0.02;
+    private static final double STRAFE_GAIN = 0.1;
+    private static final double TURN_GAIN = 0.05;
 
     public DriveSubsystem(RobotHardware hardware, VisionSubsystem vision) {
         this.hardware = hardware;
@@ -23,10 +33,9 @@ public class DriveSubsystem {
         hardware.getRightFront().setPower(0);
 
     }
-    public void drive(double forward, double strafe, double rotateLeft, double rotateRight, boolean stickPressed) {
+    public void drive(double forward, double strafe, double rotate, boolean stickPressed) {
         double y = forward;
         double x = strafe;
-        double rotate = rotateRight - rotateLeft;
         //Slows speed of wheels
         double dampening;
         if(stickPressed) {
@@ -48,20 +57,20 @@ public class DriveSubsystem {
         hardware.getRightFront().setPower(frontRightPower);
     }
     public void drive(double forward, double strafe, double rotate) {
-        double y = forward;
-        double x = strafe;
+        drive(forward, strafe, rotate, false);
+    }
 
-        //Calculating the power for the wheels
-        double frontLeftPower = (y + x + rotate);
-        double backLeftPower = (y - x + rotate);
-        double frontRightPower = (y - x - rotate);
-        double backRightPower = (y + x - rotate);
+    //Helper Functions for Autoalignment
+    private double calculateAutoDrive(double rangeError) {
+        return Range.clip(rangeError * SPEED_GAIN, -MAX_AUTO_SPEED, MAX_AUTO_SPEED);
+    }
 
-        //Set Power
-        hardware.getLeftBack().setPower(backLeftPower);
-        hardware.getLeftFront().setPower(frontLeftPower);
-        hardware.getRightBack().setPower(backRightPower);
-        hardware.getRightFront().setPower(frontRightPower);
+    private double calculateAutoTurn(double headingError) {
+        return Range.clip(headingError * -TURN_GAIN, -MAX_AUTO_TURN, MAX_AUTO_TURN);
+    }
+
+    private double calculateAutoStrafe(double lateralIn) {
+        return Range.clip(lateralIn * STRAFE_GAIN, -MAX_AUTO_STRAFE, MAX_AUTO_STRAFE);
     }
 
 }
