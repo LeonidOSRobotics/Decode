@@ -69,8 +69,8 @@ public class DriveSubsystem {
         return Range.clip(headingError * -TURN_GAIN, -MAX_AUTO_TURN, MAX_AUTO_TURN);
     }
 
-    private double calculateAutoStrafe(double lateralIn) {
-        return Range.clip(lateralIn * STRAFE_GAIN, -MAX_AUTO_STRAFE, MAX_AUTO_STRAFE);
+    private double calculateAutoStrafe(double lateralError) {
+        return Range.clip(lateralError * STRAFE_GAIN, -MAX_AUTO_STRAFE, MAX_AUTO_STRAFE);
     }
 
 }

@@ -26,15 +26,32 @@ public class VisionSubsystem {
         hardware.getCamera().pipelineSwitch(0);
         hardware.getCamera().setPollRateHz(100);
         hardware.getCamera().start();
+        getLatestTag();
+    }
+
+    private void getLatestTag(){
         result = hardware.getCamera().getLatestResult();
     }
 
     public int getTagID() {
-        result = hardware.getCamera().getLatestResult();
+        getLatestTag();
         if(result.getFiducialResults().isEmpty()){
             return -1;
         }
         return result.getFiducialResults().get(0).getFiducialId(); //desired.getFiducialId();
+    }
+
+    /**
+     * Uses the camera to calculate and return the position (mm and degrees)
+     * of the robot relative to the Apriltag in view.
+     * Precondition: An AprilTag is visible
+     * @return The alignment of the robot {distance, strafe, heading}
+     */
+    public double[] getAlignmentError(){
+        double[] alignmentError = new double[3];
+        getLatestTag();
+        return alignmentError;
+
     }
 
 
