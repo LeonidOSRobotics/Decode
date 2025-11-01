@@ -31,7 +31,10 @@ public class VisionSubsystem {
 
     public VisionSubsystem(RobotHardware hardware) {
         this.hardware = hardware;
-        hardware.getCamera().getLatestResult();
+        hardware.getCamera().pipelineSwitch(0);
+        hardware.getCamera().setPollRateHz(100);
+        hardware.getCamera().start();
+        result = hardware.getCamera().getLatestResult();
         desired = selectDesiredTag(result.getFiducialResults());
     }
 
@@ -62,8 +65,13 @@ public class VisionSubsystem {
     }
     public int getTagID() {
         hardware.getCamera().getLatestResult();
-        desired = selectDesiredTag(result.getFiducialResults());
-        return desired.getFiducialId();
+        if(result == null || result.isValid()){
+
+            return 0;
+        }
+        //desired = selectDesiredTag(result.getFiducialResults());
+        result.getFiducialResults();
+        return 8; //desired.getFiducialId();
     }
 
 
