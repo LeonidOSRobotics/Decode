@@ -64,14 +64,14 @@ public class VisionSubsystem {
 
     }
     public int getTagID() {
-        hardware.getCamera().getLatestResult();
-        if(result == null || result.isValid()){
+        result = hardware.getCamera().getLatestResult();
+        if(result.getFiducialResults().isEmpty()){
 
             return 0;
         }
         //desired = selectDesiredTag(result.getFiducialResults());
-        result.getFiducialResults();
-        return 8; //desired.getFiducialId();
+
+        return result.getFiducialResults().get(0).getFiducialId(); //desired.getFiducialId();
     }
 
 
