@@ -27,7 +27,6 @@ public class VisionSubsystem {
     private static final double STRAFE_GAIN = 0.1;
     private static final double TURN_GAIN = 0.05;
 
-    private static final int DESIRED_TAG_ID = 20;
 
     public VisionSubsystem(RobotHardware hardware) {
         this.hardware = hardware;
@@ -35,7 +34,6 @@ public class VisionSubsystem {
         hardware.getCamera().setPollRateHz(100);
         hardware.getCamera().start();
         result = hardware.getCamera().getLatestResult();
-        desired = selectDesiredTag(result.getFiducialResults());
     }
 
     public double calculateAutoDrive(double rangeError) {
@@ -50,27 +48,12 @@ public class VisionSubsystem {
         return Range.clip(lateralIn * STRAFE_GAIN, -MAX_AUTO_STRAFE, MAX_AUTO_STRAFE);
     }
 
-    public LLResultTypes.FiducialResult selectDesiredTag(List<LLResultTypes.FiducialResult>list){
-        if (list == null || list.isEmpty()) return null;
-        if (DESIRED_TAG_ID >= 0){
-            return list.stream()
-                    .filter(fr -> fr.getFiducialId() == DESIRED_TAG_ID)
-                    .min(Comparator.comparingDouble(fr -> Math.abs(fr.getCameraPoseTargetSpace().getPosition().z)))
-                    .orElse(null);
-        }
-        return list.stream()
-                .min(Comparator.comparingDouble(fr -> Math.abs(fr.getCameraPoseTargetSpace().getPosition().z)))
-                .orElse(null);
 
-    }
     public int getTagID() {
         result = hardware.getCamera().getLatestResult();
         if(result.getFiducialResults().isEmpty()){
-
-            return 0;
+            return -1;
         }
-        //desired = selectDesiredTag(result.getFiducialResults());
-
         return result.getFiducialResults().get(0).getFiducialId(); //desired.getFiducialId();
     }
 
