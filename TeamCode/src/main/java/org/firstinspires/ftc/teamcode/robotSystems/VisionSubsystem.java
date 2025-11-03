@@ -19,6 +19,8 @@ public class VisionSubsystem {
 
     RobotHardware hardware;
     LLResult result;
+    private static final double M_TO_IN = 39.3701;
+    private static final double DESIRED_DISTANCE = 50.0;
 
 
     public VisionSubsystem(RobotHardware hardware) {
@@ -48,8 +50,16 @@ public class VisionSubsystem {
      * @return The alignment of the robot {distance, strafe, heading}
      */
     public double[] getAlignmentError(){
-        double[] alignmentError = new double[3];
+
         getLatestTag();
+        LLResultTypes.FiducialResult tag = result.getFiducialResults().get(0);
+        double zMeters   = tag.getCameraPoseTargetSpace().getPosition().z;
+        double xMeters   = tag.getCameraPoseTargetSpace().getPosition().x;
+        double rangeIn   = zMeters * M_TO_IN;
+        double lateralIn = xMeters * M_TO_IN;
+        double rangeError   = rangeIn - DESIRED_DISTANCE;
+        double headingError = tag.getTargetXDegrees();
+        double[] alignmentError = {rangeError, lateralIn, headingError};
         return alignmentError;
 
     }
