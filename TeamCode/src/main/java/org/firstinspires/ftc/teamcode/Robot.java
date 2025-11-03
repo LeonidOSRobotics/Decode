@@ -14,6 +14,7 @@ public class Robot {
     VisionSubsystem vision;
     DriveSubsystem driveTrain;
     LEDSubsystem LED;
+    ImuSubsystem imu;
 
 
 
@@ -24,7 +25,8 @@ public class Robot {
 
         //Initializes the individual subsystems for the robot
         vision = new VisionSubsystem(hardware);
-        driveTrain = new DriveSubsystem(hardware, vision);
+        imu = new ImuSubsystem(hardware);
+        driveTrain = new DriveSubsystem(hardware, vision, imu);
         LED = new LEDSubsystem(hardware);
     }
 }

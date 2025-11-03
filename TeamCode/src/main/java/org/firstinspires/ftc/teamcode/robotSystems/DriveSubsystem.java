@@ -13,6 +13,8 @@ public class DriveSubsystem {
 
     RobotHardware hardware;
     VisionSubsystem vision;
+    ImuSubsystem imu;
+
 
     //Variables for Autoalignment
     private static final double MAX_AUTO_SPEED = 0.5;
@@ -22,10 +24,12 @@ public class DriveSubsystem {
     private static final double STRAFE_GAIN = 0.1;
     private static final double TURN_GAIN = 0.05;
 
-    public DriveSubsystem(RobotHardware hardware, VisionSubsystem vision) {
+    public DriveSubsystem(RobotHardware hardware, VisionSubsystem vision, ImuSubsystem imu) {
         this.hardware = hardware;
         this.vision = vision;
+        this.imu = imu;
     }
+
     public void stopDriveTrain() {
         hardware.getLeftBack().setPower(0);
         hardware.getRightBack().setPower(0);
@@ -56,6 +60,13 @@ public class DriveSubsystem {
         hardware.getRightBack().setPower(backRightPower);
         hardware.getRightFront().setPower(frontRightPower);
     }
+
+    public void fieldOrientedDrive(double forward, double strafe, double rotate) {
+        double rotStrafe = strafe * Math.cos(imu.getBotHeading()) - forward * Math.sin(-imu.getBotHeading());
+        double rotForward = strafe * Math.sin(-imu.getBotHeading()) + forward * Math.cos(imu.getBotHeading());
+        drive(rotForward, rotStrafe, rotate);
+
+    }
     public void drive(double forward, double strafe, double rotate) {
         drive(forward, strafe, rotate, false);
     }
@@ -80,6 +91,9 @@ public class DriveSubsystem {
     public void autoAlignment(){
         
     }
+
+
+
 
 }
 

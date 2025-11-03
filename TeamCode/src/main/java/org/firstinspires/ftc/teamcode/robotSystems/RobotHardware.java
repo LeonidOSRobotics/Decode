@@ -1,10 +1,12 @@
 package org.firstinspires.ftc.teamcode.robotSystems;
 
 import com.qualcomm.hardware.limelightvision.Limelight3A;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
+import com.qualcomm.robotcore.hardware.IMU;
 
 /*
  * This class is where we identify the physical components of the robot
@@ -19,6 +21,7 @@ import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
  */
 
 public class RobotHardware {
+    IMU imu = null;
     HardwareMap hwMap = null; //TODO Can we get rid of this variable, is it used outside the the constructor?
     private Limelight3A camera = null;
     private DcMotor leftFront = null;
@@ -35,6 +38,10 @@ public class RobotHardware {
 
     public void init(HardwareMap ahwMap) {
         hwMap = ahwMap;
+        imu = hwMap.get(IMU.class, "imu");
+        IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
+                RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.LEFT));
+        imu.initialize(parameters);
         leftBack = hwMap.get(DcMotor.class, "leftBack");
         leftFront= hwMap.get(DcMotor.class, "leftFront");
         rightFront = hwMap.get(DcMotor.class, "rightFront");
@@ -52,6 +59,7 @@ public class RobotHardware {
         leftBack.setDirection(DcMotorSimple.Direction.FORWARD);
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        imu.resetYaw();
     }
 
     public void startCamera(){
@@ -91,5 +99,9 @@ public class RobotHardware {
 
     public RevBlinkinLedDriver getBlinkin() {
         return blinkin;
+    }
+
+    public IMU getImu() {
+        return imu;
     }
 }

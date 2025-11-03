@@ -32,6 +32,10 @@ public class SampleTeleOp extends LinearOpMode {
             telemetry.addData("ID: ", robot.vision.getTagID());
             telemetry.update();
 
+            double rotate = gamepad1.left_trigger - gamepad1.right_trigger;
+
+            robot.driveTrain.fieldOrientedDrive(gamepad1.left_stick_y, gamepad1.left_stick_x, rotate);
+
         }
 
     }
