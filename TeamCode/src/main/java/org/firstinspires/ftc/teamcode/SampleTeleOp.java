@@ -19,13 +19,13 @@ public class SampleTeleOp extends LinearOpMode {
 
         waitForStart();
         while (opModeIsActive()) {
-            if (gamepad1.x) {
+            if (robot.vision.getTagID() == 20) {
                 robot.LED.setBlue();
             }
-            else if (gamepad1.b) {
+            else if (robot.vision.getTagID() == 24) {
                 robot.LED.setRed();
             }
-            else if (gamepad1.y) {
+            else if (robot.vision.getTagID() == -1) {
                 robot.LED.setOff();
 
             }
