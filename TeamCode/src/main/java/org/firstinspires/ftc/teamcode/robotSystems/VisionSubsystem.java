@@ -46,7 +46,7 @@ public class VisionSubsystem {
     /**
      * Uses the camera to calculate and return the position (mm and degrees)
      * of the robot relative to the Apriltag in view.
-     * Precondition: An AprilTag is visible
+     * @Precondition: An AprilTag is visible
      * @return The alignment of the robot {distance, strafe, heading}
      */
     public double[] getAlignmentError(){

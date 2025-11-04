@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.hardware.IMU;
 
-/*
+/**
  * This class is where we identify the physical components of the robot
  * Think of this as your "wiring diagram in code".
  * It knows:
@@ -40,7 +40,7 @@ public class RobotHardware {
         hwMap = ahwMap;
         imu = hwMap.get(IMU.class, "imu");
         IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
-                RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.LEFT));
+                RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.RIGHT));
         imu.initialize(parameters);
         leftBack = hwMap.get(DcMotor.class, "leftBack");
         leftFront= hwMap.get(DcMotor.class, "leftFront");

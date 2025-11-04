@@ -89,6 +89,11 @@ public class DriveSubsystem {
      * tag in regards to the robots heading and strafe
      */
     public void autoAlignment(){
+        double[] alignmentError = vision.getAlignmentError();
+        double turn = Range.clip(alignmentError[2] * -TURN_GAIN,   -MAX_AUTO_TURN,   MAX_AUTO_TURN);
+        double strafe = Range.clip(alignmentError[1] * STRAFE_GAIN, -MAX_AUTO_STRAFE, MAX_AUTO_STRAFE);
+        drive(0, strafe, turn);
+        
         
     }
 
