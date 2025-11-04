@@ -93,7 +93,7 @@ public class DriveSubsystem {
         double turn = Range.clip(alignmentError[2] * -TURN_GAIN,   -MAX_AUTO_TURN,   MAX_AUTO_TURN);
         double strafe = Range.clip(alignmentError[1] * STRAFE_GAIN, -MAX_AUTO_STRAFE, MAX_AUTO_STRAFE);
         drive(0, strafe, turn);
-        
+
         
     }
 
