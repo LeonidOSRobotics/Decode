@@ -29,11 +29,12 @@ public class RobotHardware {
     private DcMotor leftBack = null;
     private DcMotor rightBack = null;
     private RevBlinkinLedDriver blinkin = null;
+    private DcMotor shooterLeft = null;
+    private DcMotor shooterRight = null;
 
     public static final double M_TO_IN = 39.3701;
     public static final double DESIRED_DISTANCE_IN = 50.0;
     public static final int DESIRED_TAG_ID = 20;
-
 
 
     public void init(HardwareMap ahwMap) {
@@ -43,12 +44,15 @@ public class RobotHardware {
                 RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.RIGHT));
         imu.initialize(parameters);
         leftBack = hwMap.get(DcMotor.class, "leftBack");
-        leftFront= hwMap.get(DcMotor.class, "leftFront");
+        leftFront = hwMap.get(DcMotor.class, "leftFront");
         rightFront = hwMap.get(DcMotor.class, "rightFront");
         rightBack = hwMap.get(DcMotor.class, "rightBack");
 
         camera = hwMap.get(Limelight3A.class, "limelight");
         blinkin = hwMap.get(RevBlinkinLedDriver.class, "blinkin");
+
+        shooterLeft = hwMap.get(DcMotor.class, "shooterLeft");
+        shooterRight = hwMap.get(DcMotor.class, "shooterRight");
 
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -60,16 +64,20 @@ public class RobotHardware {
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
         imu.resetYaw();
+
+        shooterLeft.setDirection(DcMotorSimple.Direction.FORWARD);
+        shooterRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
     }
 
-    public void startCamera(){
+    public void startCamera() {
         if (camera != null) {
             camera.pipelineSwitch(0);
             camera.start();
         }
     }
 
-    public void stopCamera(){
+    public void stopCamera() {
         if (camera != null) {
             camera.stop();
         }
@@ -103,5 +111,13 @@ public class RobotHardware {
 
     public IMU getImu() {
         return imu;
+    }
+
+    public DcMotor getShooterLeft() {
+        return shooterLeft;
+    }
+
+    public DcMotor getShooterRight() {
+        return shooterRight;
     }
 }
