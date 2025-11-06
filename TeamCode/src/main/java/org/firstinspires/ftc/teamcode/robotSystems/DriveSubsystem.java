@@ -43,9 +43,9 @@ public class DriveSubsystem {
         //Slows speed of wheels
         double dampening;
         if(stickPressed) {
-            dampening = .8;
+            dampening = .2;
         }else{
-            dampening = .6;
+            dampening = .4;
         }
 
         //Calculating the power for the wheels
