@@ -12,10 +12,10 @@ public class AutoManager extends Robot{
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // No External Gearing.
     private ElapsedTime runtime = new ElapsedTime();
 
-    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_GOBUILDA * DRIVE_GEAR_REDUCTION) /
+    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_GOBUILDA * DRIVE_GEAR_REDUCTION);
 
 
-    public void driveinches(double speed,
+    public void driveInches(double speed,
                             double leftInches, double rightInches,
                             double timeoutS) {
         resetEncoders();
