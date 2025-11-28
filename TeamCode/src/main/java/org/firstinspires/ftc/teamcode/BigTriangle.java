@@ -12,7 +12,7 @@ public class BigTriangle extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        robot.driveInches(.5, 10, 10, 3.0);
+        robot.driveCm(.5, 10, 10, 3.0);
 
 
     }
