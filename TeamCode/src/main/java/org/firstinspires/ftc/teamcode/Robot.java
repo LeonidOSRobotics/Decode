@@ -16,6 +16,7 @@ public class Robot {
     LEDSubsystem LED;
     ImuSubsystem imu;
     ShooterSubsystem shooter;
+    AutoManager autoManager;
 
 
 
@@ -30,5 +31,7 @@ public class Robot {
         driveTrain = new DriveSubsystem(hardware, vision, imu);
         LED = new LEDSubsystem(hardware);
         shooter = new ShooterSubsystem(hardware);
+        autoManager = new AutoManager(driveTrain, hardware, vision);
+
     }
 }
