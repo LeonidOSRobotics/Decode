@@ -64,6 +64,7 @@ public class AutoManager {
 
         }
 
+        
         // Stop all motion;
         driveTrain.stopDriveTrain();
 
