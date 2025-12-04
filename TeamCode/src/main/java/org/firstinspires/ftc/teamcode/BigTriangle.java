@@ -11,8 +11,6 @@ public class BigTriangle extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         robot.initRobot(hardwareMap);
         waitForStart();
-        robot.autoManager.driveCm(1, 20, 20, 10.0, telemetry);
-
 
 
     }

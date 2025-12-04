@@ -1,25 +1,23 @@
 package org.firstinspires.ftc.teamcode;
-
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-import static java.lang.Thread.sleep;
-
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.robotSystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.robotSystems.RobotHardware;
 import org.firstinspires.ftc.teamcode.robotSystems.VisionSubsystem;
 
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+import static java.lang.Thread.sleep;
+
+
 public class AutoManager {
+    private ElapsedTime runtime = new ElapsedTime();
 
     static final double COUNTS_PER_MOTOR_GOBILDA    = 537.7 ;  // GoBilda Motor Encoder
-    static final int WHEEL_DIAMETER_MM              = 104;     // GoBilda Mecanum Wheels
+    static final double WHEEL_DIAMETER_CM           = 10.4;     // GoBilda Mecanum Wheels
     static final double DRIVE_GEAR_REDUCTION        = 1.0 ;    // No External Gearing.
-    private ElapsedTime runtime = new ElapsedTime();
-    static final double COUNTS_PER_CM             = ((COUNTS_PER_MOTOR_GOBILDA * DRIVE_GEAR_REDUCTION)/
-            (WHEEL_DIAMETER_MM * 3.1415)) / 10;
+
+    static final double COUNTS_PER_CM               = (COUNTS_PER_MOTOR_GOBILDA*DRIVE_GEAR_REDUCTION)/
+            (WHEEL_DIAMETER_CM * 3.1415);
 
     private DriveSubsystem driveTrain;
     private VisionSubsystem vision;
@@ -32,7 +30,7 @@ public class AutoManager {
         this.vision = vision;
     }
 
-    public void driveCm(double speed, double leftCm, double rightCm, double timeoutS, Telemetry telemetry) {
+    public void driveCm(double speed, double leftCm, double rightCm, double timeoutS) {
         resetEncoders();
         int newLeftTarget;
         int newRightTarget;
@@ -42,14 +40,11 @@ public class AutoManager {
         newRightTarget = hardware.getRightFront().getCurrentPosition() + (int)(rightCm * COUNTS_PER_CM);
         hardware.getLeftFront().setTargetPosition(newLeftTarget);
         hardware.getRightFront().setTargetPosition(newRightTarget);
-        hardware.getLeftBack().setTargetPosition(newLeftTarget);
-        hardware.getRightBack().setTargetPosition(newRightTarget);
 
         // Turn On RUN_TO_POSITION
         hardware.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         hardware.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        hardware.getLeftBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        hardware.getRightBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
 
         // reset the timeout time and start motion.
         runtime.reset();
@@ -64,14 +59,9 @@ public class AutoManager {
         // always end the motion as soon as possible.
         // However, if you require that BOTH motors have finished their moves before the robot continues
         // onto the next step, use (isBusy() || isBusy()) in the loop test.
-        while (true || ((runtime.seconds() < timeoutS) &&
-                (hardware.getLeftFront().isBusy() && hardware.getRightFront().isBusy()))) {
+        while ((runtime.seconds() < timeoutS) &&
+                (hardware.getLeftFront().isBusy() && hardware.getLeftFront().isBusy() )) {
 
-                // Data for the driver.
-                telemetry.addData("Running to",  " %7d :%7d", newLeftTarget,  newRightTarget);
-                telemetry.addData("Currently at",  " at %7d :%7d",
-                        hardware.getLeftFront().getCurrentPosition(), hardware.getRightFront().getCurrentPosition());
-                telemetry.update();
         }
 
         // Stop all motion;
@@ -95,7 +85,6 @@ public class AutoManager {
     }
 
     //Needs Testing
-
     /**
      * When a tage is visible this method should have the robot
      * line up with the target automatically.
