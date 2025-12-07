@@ -39,14 +39,16 @@ public class DriveSubsystem {
     }
     public void drive(double forward, double strafe, double rotate, boolean stickPressed) {
         double y = forward;
-        double x = strafe;
+        double x = -1*strafe;
         //Slows speed of wheels
         double dampening;
         if(stickPressed) {
-            dampening = .2;
+            dampening = .6;
         }else{
-            dampening = .4;
+            dampening = .8;
         }
+        //Reduce turning power for control
+        rotate *= .6;
 
         //Calculating the power for the wheels
         double frontLeftPower = (y + x + rotate) * dampening;

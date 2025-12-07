@@ -37,7 +37,7 @@ public class ScrimmageTeleOp extends LinearOpMode {
             }
             else {
                 double rotate = gamepad1.left_trigger - gamepad1.right_trigger;
-                robot.driveTrain.drive(gamepad1.left_stick_y, gamepad1.left_stick_x, rotate);
+                robot.driveTrain.fieldOrientedDrive(gamepad1.left_stick_y, gamepad1.left_stick_x, rotate);
             }
 
             if (gamepad1.right_bumper){
