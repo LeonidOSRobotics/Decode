@@ -9,6 +9,8 @@ package org.firstinspires.ftc.teamcode.robotSystems;
 
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+
 public class DriveSubsystem {
 
     RobotHardware hardware;
@@ -39,7 +41,7 @@ public class DriveSubsystem {
     }
     public void drive(double forward, double strafe, double rotate, boolean stickPressed) {
         double y = forward;
-        double x = -1*strafe;
+        double x = strafe;
         //Slows speed of wheels
         double dampening;
         if(stickPressed) {
@@ -52,9 +54,9 @@ public class DriveSubsystem {
 
         //Calculating the power for the wheels
         double frontLeftPower = (y + x + rotate) * dampening;
-        double backLeftPower = (y - x + rotate) * dampening;
         double frontRightPower = (y - x - rotate) * dampening;
         double backRightPower = (y + x - rotate) * dampening;
+        double backLeftPower = (y - x + rotate) * dampening;
 
         //Set Power
         hardware.getLeftBack().setPower(backLeftPower);
@@ -64,9 +66,23 @@ public class DriveSubsystem {
     }
 
     public void fieldOrientedDrive(double forward, double strafe, double rotate) {
-        double rotStrafe = strafe * Math.cos(imu.getBotHeading()) - forward * Math.sin(-imu.getBotHeading());
-        double rotForward = strafe * Math.sin(-imu.getBotHeading()) + forward * Math.cos(imu.getBotHeading());
-        drive(rotForward, rotStrafe, rotate);
+        //double newStrafe = strafe * Math.cos(imu.getBotHeading()) - forward * Math.sin(-imu.getBotHeading());
+        //double newForward = strafe * Math.sin(-imu.getBotHeading()) + forward * Math.cos(imu.getBotHeading());
+
+        // First, convert direction being asked to drive to polar coordinates
+        double theta = Math.atan2(forward, strafe);
+        double r = Math.hypot(strafe, forward);
+
+        // Second, rotate angle by the angle the robot is pointing
+        theta = AngleUnit.normalizeRadians(theta -
+                hardware.imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
+
+        // Third, convert back to cartesian
+        double newForward = r * Math.sin(theta);
+        double newStrafe = r * Math.cos(theta);
+
+        // Finally, call the drive method with robot relative forward and right amounts
+        drive(newForward, newStrafe, rotate);
 
     }
     public void drive(double forward, double strafe, double rotate) {
