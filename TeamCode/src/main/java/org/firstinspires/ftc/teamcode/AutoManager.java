@@ -78,6 +78,10 @@ public class AutoManager {
 
 
     public void resetEncoders(){
+        hardware.getRightFront().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        hardware.getLeftFront().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        hardware.getRightBack().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        hardware.getLeftBack().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         hardware.getRightFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         hardware.getLeftFront().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
