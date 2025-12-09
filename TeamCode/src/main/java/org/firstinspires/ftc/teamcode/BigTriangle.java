@@ -12,6 +12,7 @@ public class BigTriangle extends LinearOpMode {
         robot.initRobot(hardwareMap);
         waitForStart();
         robot.autoManager.driveCm(.25,150,150,15);
+        robot.autoManager.turnDegrees(90);
 
     }
 }
