@@ -12,11 +12,11 @@ import static java.lang.Thread.sleep;
 public class AutoManager {
     private ElapsedTime runtime = new ElapsedTime();
 
-    static final double COUNTS_PER_MOTOR_GOBILDA    = 537.7 ;  // GoBilda Motor Encoder
-    static final double WHEEL_DIAMETER_CM           = 10.4;     // GoBilda Mecanum Wheels
-    static final double DRIVE_GEAR_REDUCTION        = 1.0 ;    // No External Gearing.
+    static final double COUNTS_PER_MOTOR_GOBILDA = 537.7;  // GoBilda Motor Encoder
+    static final double WHEEL_DIAMETER_CM = 10.4;     // GoBilda Mecanum Wheels
+    static final double DRIVE_GEAR_REDUCTION = 1.0;    // No External Gearing.
 
-    static final double COUNTS_PER_CM               = (COUNTS_PER_MOTOR_GOBILDA*DRIVE_GEAR_REDUCTION)/
+    static final double COUNTS_PER_CM = (COUNTS_PER_MOTOR_GOBILDA * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_CM * 3.1415);
 
     private DriveSubsystem driveTrain;
@@ -36,8 +36,8 @@ public class AutoManager {
         int newRightTarget;
 
         // Determine new target position, and pass to motor controller
-        newLeftTarget = hardware.getLeftFront().getCurrentPosition() + (int)(leftCm * COUNTS_PER_CM);
-        newRightTarget = hardware.getRightFront().getCurrentPosition() + (int)(rightCm * COUNTS_PER_CM);
+        newLeftTarget = hardware.getLeftFront().getCurrentPosition() + (int) (leftCm * COUNTS_PER_CM);
+        newRightTarget = hardware.getRightFront().getCurrentPosition() + (int) (rightCm * COUNTS_PER_CM);
         hardware.getLeftFront().setTargetPosition(newLeftTarget);
         hardware.getRightFront().setTargetPosition(newRightTarget);
 
@@ -60,11 +60,11 @@ public class AutoManager {
         // However, if you require that BOTH motors have finished their moves before the robot continues
         // onto the next step, use (isBusy() || isBusy()) in the loop test.
         while ((runtime.seconds() < timeoutS) &&
-                (hardware.getLeftFront().isBusy() && hardware.getLeftFront().isBusy() )) {
+                (hardware.getLeftFront().isBusy() && hardware.getLeftFront().isBusy())) {
 
         }
 
-        
+
         // Stop all motion;
         driveTrain.stopDriveTrain();
 
@@ -76,8 +76,41 @@ public class AutoManager {
 
     }
 
+    public void strafeToPosition(double cm, double speed, double timeoutS) {
 
-    public void resetEncoders(){
+
+        int newLeftFrontTarget = (int) (hardware.getLeftFront().getCurrentPosition() + COUNTS_PER_CM);
+        int newRightFrontTarget = (int) (hardware.getRightFront().getCurrentPosition() - COUNTS_PER_CM);
+        int newLeftBackTarget = (int) (hardware.getLeftBack().getCurrentPosition() - COUNTS_PER_CM);
+        int newRightBackTarget = (int) (hardware.getRightBack().getCurrentPosition() + COUNTS_PER_CM);
+        hardware.getLeftFront().setTargetPosition(newLeftFrontTarget);
+        hardware.getLeftBack().setTargetPosition(newRightFrontTarget);
+        hardware.getRightFront().setTargetPosition(newLeftBackTarget);
+        hardware.getRightBack().setTargetPosition(newRightBackTarget);
+
+        hardware.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.getLeftBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.getRightBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
+        runtime.reset();
+        hardware.getLeftFront().setPower(Math.abs(speed));
+        hardware.getLeftBack().setPower(Math.abs(speed));
+        hardware.getRightFront().setPower(Math.abs(speed));
+        hardware.getRightBack().setPower(Math.abs(speed));
+
+        while (runtime.seconds() < timeoutS && hardware.getLeftFront().isBusy() && hardware.getRightFront().isBusy()
+                && hardware.getLeftBack().isBusy() && hardware.getRightBack().isBusy()) {
+
+
+
+        }
+
+
+    }
+
+    public void resetEncoders () {
         hardware.getRightFront().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         hardware.getLeftFront().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         hardware.getRightBack().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -88,26 +121,16 @@ public class AutoManager {
         hardware.getRightFront().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         hardware.getLeftFront().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
-
     //Needs Testing
     /**
-     * When a tage is visible this method should have the robot
+     * When a tag is visible this method should have the robot
      * line up with the target automatically.
      */
-    public void driveToTag(){
+    public void driveToTag()
+    {
         while (vision.getAlignmentError()[1] > 0.5 & vision.getAlignmentError()[2] > 0.5) {
             driveTrain.autoAlignment();
         }
     }
-
-
 }
-
-
-
-
-
-
-
-
 
