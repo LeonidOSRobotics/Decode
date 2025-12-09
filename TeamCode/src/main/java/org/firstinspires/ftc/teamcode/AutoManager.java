@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 import org.firstinspires.ftc.teamcode.robotSystems.DriveSubsystem;
+import org.firstinspires.ftc.teamcode.robotSystems.ImuSubsystem;
 import org.firstinspires.ftc.teamcode.robotSystems.RobotHardware;
 import org.firstinspires.ftc.teamcode.robotSystems.VisionSubsystem;
 
@@ -21,13 +22,15 @@ public class AutoManager {
 
     private DriveSubsystem driveTrain;
     private VisionSubsystem vision;
+    private ImuSubsystem imu;
     RobotHardware hardware;
 
 
-    public AutoManager(DriveSubsystem driveTrain, RobotHardware hardware, VisionSubsystem vision) {
+    public AutoManager(DriveSubsystem driveTrain, RobotHardware hardware, VisionSubsystem vision, ImuSubsystem imu) {
         this.driveTrain = driveTrain;
         this.hardware = hardware;
         this.vision = vision;
+        this.imu = imu;
     }
 
     public void driveCm(double speed, double leftCm, double rightCm, double timeoutS) {
@@ -132,5 +135,19 @@ public class AutoManager {
             driveTrain.autoAlignment();
         }
     }
+
+    public void turnDegrees(int degrees){
+        imu.resetYaw();
+        double targetRadians = degrees * (Math.PI / 180);
+        double currentRadian = imu.getBotHeading();
+        while(targetRadians != currentRadian){
+            driveTrain.drive(0, 0, targetRadians-currentRadian);
+            currentRadian = imu.getBotHeading();
+        }
+        driveTrain.stopDriveTrain();
+
+
+    }
+
 }
 
