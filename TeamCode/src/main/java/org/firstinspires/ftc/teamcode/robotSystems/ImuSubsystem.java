@@ -13,7 +13,7 @@ public class ImuSubsystem {
         return hardware.getImu().getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS) - Math.PI;
     }
 
-    private void resetYaw() {
+    public void resetYaw() {
         hardware.getImu().resetYaw();
     }
 }
