@@ -141,7 +141,6 @@ public class AutoManager {
         double targetRadians = degrees * (Math.PI / 180);
         double currentRadian = imu.getBotHeading();
         while(targetRadians != currentRadian){
-            driveTrain.drive(0, 0, targetRadians-currentRadian);
             currentRadian = imu.getBotHeading();
         }
         driveTrain.stopDriveTrain();
