@@ -77,10 +77,10 @@ public class AutoManager {
     public void strafeToPosition(double cm, double speed, double timeoutS) {
 
 
-        int newLeftFrontTarget = (int) (hardware.getLeftFront().getCurrentPosition() + COUNTS_PER_CM);
-        int newRightFrontTarget = (int) (hardware.getRightFront().getCurrentPosition() - COUNTS_PER_CM);
-        int newLeftBackTarget = (int) (hardware.getLeftBack().getCurrentPosition() - COUNTS_PER_CM);
-        int newRightBackTarget = (int) (hardware.getRightBack().getCurrentPosition() + COUNTS_PER_CM);
+        int newLeftFrontTarget = (int) (hardware.getLeftFront().getCurrentPosition() + (cm  * COUNTS_PER_CM));
+        int newRightFrontTarget = (int) (hardware.getRightFront().getCurrentPosition() - (cm *COUNTS_PER_CM));
+        int newLeftBackTarget = (int) (hardware.getLeftBack().getCurrentPosition() - (cm * COUNTS_PER_CM));
+        int newRightBackTarget = (int) (hardware.getRightBack().getCurrentPosition() + (cm * COUNTS_PER_CM));
 
         hardware.getLeftFront().setTargetPosition(newLeftFrontTarget);
         hardware.getLeftBack().setTargetPosition(newRightFrontTarget);
@@ -102,7 +102,9 @@ public class AutoManager {
         while (runtime.seconds() < timeoutS && hardware.getLeftFront().isBusy() && hardware.getRightFront().isBusy()
                 && hardware.getLeftBack().isBusy() && hardware.getRightBack().isBusy()) {
 
-
+            driveTrain.stopDriveTrain();
+            hardware.getLeftFront().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            hardware.getRightFront().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         }
 
