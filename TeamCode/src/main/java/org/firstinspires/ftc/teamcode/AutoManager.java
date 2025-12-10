@@ -53,17 +53,12 @@ public class AutoManager {
         runtime.reset();
         hardware.getLeftFront().setPower(Math.abs(speed));
         hardware.getRightFront().setPower(Math.abs(speed));
-        hardware.getRightBack().setPower(Math.abs(speed)); //Not sure if this will work, need to test
-        hardware.getLeftBack().setPower(Math.abs(speed));  // Same as line above
+        hardware.getRightBack().setPower(Math.abs(speed));
+        hardware.getLeftBack().setPower(Math.abs(speed));
 
         // keep looping while we are still active, and there is time left, and both motors are running.
-        // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
-        // its target position, the motion will stop.  This is "safer" in the event that the robot will
-        // always end the motion as soon as possible.
-        // However, if you require that BOTH motors have finished their moves before the robot continues
-        // onto the next step, use (isBusy() || isBusy()) in the loop test.
-        while ((runtime.seconds() < timeoutS) &&
-                (hardware.getLeftFront().isBusy() && hardware.getLeftFront().isBusy())) {
+        while (runtime.seconds() < timeoutS &&
+                hardware.getLeftFront().isBusy() && hardware.getLeftFront().isBusy()) {
 
         }
 
@@ -86,6 +81,7 @@ public class AutoManager {
         int newRightFrontTarget = (int) (hardware.getRightFront().getCurrentPosition() - COUNTS_PER_CM);
         int newLeftBackTarget = (int) (hardware.getLeftBack().getCurrentPosition() - COUNTS_PER_CM);
         int newRightBackTarget = (int) (hardware.getRightBack().getCurrentPosition() + COUNTS_PER_CM);
+
         hardware.getLeftFront().setTargetPosition(newLeftFrontTarget);
         hardware.getLeftBack().setTargetPosition(newRightFrontTarget);
         hardware.getRightFront().setTargetPosition(newLeftBackTarget);
@@ -129,8 +125,7 @@ public class AutoManager {
      * When a tag is visible this method should have the robot
      * line up with the target automatically.
      */
-    public void driveToTag()
-    {
+    public void driveToTag() {
         while (vision.getAlignmentError()[1] > 0.5 & vision.getAlignmentError()[2] > 0.5) {
             driveTrain.autoAlignment();
         }
