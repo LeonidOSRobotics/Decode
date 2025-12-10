@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.robotSystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.robotSystems.ImuSubsystem;
 import org.firstinspires.ftc.teamcode.robotSystems.RobotHardware;
@@ -33,7 +34,7 @@ public class AutoManager {
         this.imu = imu;
     }
 
-    public void driveCm(double speed, double leftCm, double rightCm, double timeoutS) {
+    public void driveCm(double speed, double leftCm, double rightCm, boolean isForward, double timeoutS) {
         resetEncoders();
         int newLeftTarget;
         int newRightTarget;
@@ -53,8 +54,14 @@ public class AutoManager {
         runtime.reset();
         hardware.getLeftFront().setPower(Math.abs(speed));
         hardware.getRightFront().setPower(Math.abs(speed));
-        hardware.getRightBack().setPower(Math.abs(speed));
-        hardware.getLeftBack().setPower(Math.abs(speed));
+        if(isForward){
+            hardware.getRightBack().setPower(speed);
+            hardware.getLeftBack().setPower(speed);
+        }else{
+            hardware.getRightBack().setPower(-speed);
+            hardware.getLeftBack().setPower(-speed);
+        }
+
 
         // keep looping while we are still active, and there is time left, and both motors are running.
         while (runtime.seconds() < timeoutS &&
@@ -74,7 +81,7 @@ public class AutoManager {
 
     }
 
-    public void strafeToPosition(double cm, double speed, double timeoutS) {
+    public void strafeToPosition(double cm, double speed, double timeoutS, Telemetry telemetry) {
 
 
         int newLeftFrontTarget = (int) (hardware.getLeftFront().getCurrentPosition() + (cm  * COUNTS_PER_CM));
@@ -99,14 +106,17 @@ public class AutoManager {
         hardware.getRightFront().setPower(Math.abs(speed));
         hardware.getRightBack().setPower(Math.abs(speed));
 
-        while (runtime.seconds() < timeoutS && hardware.getLeftFront().isBusy() && hardware.getRightFront().isBusy()
-                && hardware.getLeftBack().isBusy() && hardware.getRightBack().isBusy()) {
+        while ((runtime.seconds() < timeoutS && hardware.getLeftFront().isBusy() && hardware.getRightFront().isBusy()
+                && hardware.getLeftBack().isBusy() && hardware.getRightBack().isBusy())) {
 
-            driveTrain.stopDriveTrain();
-            hardware.getLeftFront().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            hardware.getRightFront().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            telemetry.addData("Value:", newLeftBackTarget);
+            telemetry.update();
 
         }
+        driveTrain.stopDriveTrain();
+        hardware.getLeftFront().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.getRightFront().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
 
     }
