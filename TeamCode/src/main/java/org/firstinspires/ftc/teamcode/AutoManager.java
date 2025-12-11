@@ -53,16 +53,13 @@ public class AutoManager {
         // reset the timeout time and start motion.
         runtime.reset();
 
-        double power = isForward ? Math.abs(speed) : -Math.abs(speed);
-         if (isForward){
-             power = Math.abs(speed);
+        double power = isForward ? Math.abs(speed) : -1 * Math.abs(speed);
+
+
              hardware.getLeftFront().setPower(power);
              hardware.getRightFront().setPower(power);
-        }else{
-             hardware.getRightBack().setPower(power);
-             hardware.getLeftBack().setPower(power);
 
-        }
+
 
 
         // keep looping while we are still active, and there is time left, and both motors are running.
