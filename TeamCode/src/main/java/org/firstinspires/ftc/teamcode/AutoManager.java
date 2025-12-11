@@ -34,7 +34,7 @@ public class AutoManager {
         this.imu = imu;
     }
 
-    public void driveCm(double speed, double leftCm, double rightCm, boolean isForward, double timeoutS) {
+    public void driveCm(double speed, double leftCm, double rightCm, boolean isForward,double timeoutS) {
         resetEncoders();
         int newLeftTarget;
         int newRightTarget;
@@ -52,14 +52,16 @@ public class AutoManager {
 
         // reset the timeout time and start motion.
         runtime.reset();
-        hardware.getLeftFront().setPower(Math.abs(speed));
-        hardware.getRightFront().setPower(Math.abs(speed));
-        if(isForward){
-            hardware.getRightBack().setPower(speed);
-            hardware.getLeftBack().setPower(speed);
+
+        double power = isForward ? Math.abs(speed) : -Math.abs(speed);
+         if (isForward){
+             power = Math.abs(speed);
+             hardware.getLeftFront().setPower(power);
+             hardware.getRightFront().setPower(power);
         }else{
-            hardware.getRightBack().setPower(-speed);
-            hardware.getLeftBack().setPower(-speed);
+             hardware.getRightBack().setPower(power);
+             hardware.getLeftBack().setPower(power);
+
         }
 
 
