@@ -44,11 +44,13 @@ public class AutoManager {
         newRightTarget = hardware.getRightFront().getCurrentPosition() + (int) (rightCm * COUNTS_PER_CM);
         hardware.getLeftFront().setTargetPosition(newLeftTarget);
         hardware.getRightFront().setTargetPosition(newRightTarget);
-
+        hardware.getLeftBack().setTargetPosition(newLeftTarget);
+        hardware.getRightBack().setTargetPosition(newRightTarget);
         // Turn On RUN_TO_POSITION
         hardware.getLeftFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         hardware.getRightFront().setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
+        hardware.getLeftBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        hardware.getRightBack().setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         // reset the timeout time and start motion.
         runtime.reset();
@@ -58,6 +60,8 @@ public class AutoManager {
 
              hardware.getLeftFront().setPower(power);
              hardware.getRightFront().setPower(power);
+             hardware.getLeftBack().setPower(power);
+             hardware.getRightBack().setPower(power);
 
 
 
@@ -75,7 +79,8 @@ public class AutoManager {
         // Turn off RUN_TO_POSITION
         hardware.getLeftFront().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         hardware.getRightFront().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
+        hardware.getLeftBack().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        hardware.getRightBack().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //sleep(250);   // optional pause after each move.
 
     }
