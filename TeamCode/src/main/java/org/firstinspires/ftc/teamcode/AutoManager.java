@@ -152,13 +152,19 @@ public class AutoManager {
         double targetRadians = degrees * (Math.PI / 180);
         double currentRadian = imu.getBotHeading();
         while(targetRadians != currentRadian){
-            driveTrain.drive(0, 0, (targetRadians - currentRadian)*.1);
+            driveTrain.drive(0, 0, (currentRadian - targetRadians)*.05);
             currentRadian = imu.getBotHeading();
         }
         driveTrain.stopDriveTrain();
-
-
     }
-
+    public double anglewrap(double radians){
+        while (radians > Math.PI) {
+            radians -= 2 * Math.PI;
+        }
+        while (radians < -Math.PI) {
+            radians += 2 * Math.PI;
+        }
+        return radians;
+    }
 }
 
