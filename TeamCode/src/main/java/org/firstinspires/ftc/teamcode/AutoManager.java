@@ -40,8 +40,8 @@ public class AutoManager {
         int newRightTarget;
 
         // Determine new target position, and pass to motor controller
-        newLeftTarget = hardware.getLeftFront().getCurrentPosition() + (int) (leftCm * COUNTS_PER_CM);
-        newRightTarget = hardware.getRightFront().getCurrentPosition() + (int) (rightCm * COUNTS_PER_CM);
+        newLeftTarget = hardware.getLeftFront().getCurrentPosition() + (int) (leftCm * COUNTS_PER_CM);// strafe method not working since we did not accuratly translate old code to new code
+        newRightTarget = hardware.getRightFront().getCurrentPosition() + (int) (rightCm * COUNTS_PER_CM);//strafe method not working since we did not accuratly translate old code to new code
         hardware.getLeftFront().setTargetPosition(newLeftTarget);
         hardware.getRightFront().setTargetPosition(newRightTarget);
         hardware.getLeftBack().setTargetPosition(newLeftTarget);
