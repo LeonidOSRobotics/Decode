@@ -17,6 +17,7 @@ public class Robot {
     ImuSubsystem imu;
     ShooterSubsystem shooter;
     AutoManager autoManager;
+    IntakeSubsystem intake;
 
 
 
