@@ -32,6 +32,8 @@ public class RobotHardware {
     private DcMotor shooterLeft = null;
     private DcMotor shooterRight = null;
 
+    private DcMotor intake = null;
+
     public static final double M_TO_IN = 39.3701;
     public static final double DESIRED_DISTANCE_IN = 50.0;
     public static final int DESIRED_TAG_ID = 20;
@@ -54,6 +56,8 @@ public class RobotHardware {
         shooterLeft = hwMap.get(DcMotor.class, "shooterLeft");
         shooterRight = hwMap.get(DcMotor.class, "shooterRight");
 
+        intake = hwMap.get(DcMotor.class, "intakeMotor");
+
         leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -67,6 +71,8 @@ public class RobotHardware {
 
         shooterLeft.setDirection(DcMotorSimple.Direction.FORWARD);
         shooterRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        intake.setDirection(DcMotorSimple.Direction.FORWARD);
 
     }
 
@@ -119,5 +125,9 @@ public class RobotHardware {
 
     public DcMotor getShooterRight() {
         return shooterRight;
+    }
+
+    public DcMotor getIntake() {
+        return intake;
     }
 }
