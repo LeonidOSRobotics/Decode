@@ -50,8 +50,12 @@ public class ScrimmageTeleOp extends LinearOpMode {
             if(gamepad1.start){
                 robot.imu.resetYaw();
             }
-
-        }
-
+            if(gamepad1.a){
+                robot.intake.powerOn();
+            }
+                else{
+                    robot.intake.powerOff();
+                }
+            }
     }
 }

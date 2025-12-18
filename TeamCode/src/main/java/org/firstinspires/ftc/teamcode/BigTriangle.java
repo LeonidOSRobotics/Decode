@@ -13,7 +13,7 @@ public class BigTriangle extends LinearOpMode {
         waitForStart();
         robot.autoManager.driveCm(.5, 10, 10, 10);
 
-       //robot.autoManager.driveCm(.35,100,100, true,20);//Forward 150cm
+        //robot.autoManager.driveCm(.35,100,100, true,20);//Forward 150cm
         //robot.autoManager.driveCm(.35,100,100, true,20);//Forward 150cm
 
         //robot.autoManager.strafeToPosition(100, .35, 15, telemetry);//right 150cm
@@ -22,7 +22,6 @@ public class BigTriangle extends LinearOpMode {
         //robot.autoManager.driveCm(.35,-100 ,-100, false,20);//Back to Return position
 
         robot.autoManager.turnDegrees(360);
-
 
 
     }
