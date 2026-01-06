@@ -18,6 +18,8 @@ public class AutoManager {
     static final double WHEEL_DIAMETER_CM = 10.4;     // GoBilda Mecanum Wheels
     static final double DRIVE_GEAR_REDUCTION = 1.0;    // No External Gearing.
 
+    static final double RADIAN_THRESHOLD = .4;         //Aprox. 5 degrees
+
     static final double COUNTS_PER_CM = (COUNTS_PER_MOTOR_GOBILDA * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_CM * 3.1415);
 
@@ -147,13 +149,21 @@ public class AutoManager {
         }
     }
 
-    public void turnDegrees(int degrees){
+    public void turnDegrees(int degrees, Telemetry telemetry){
         imu.resetYaw();
-        double targetRadians = degrees * (Math.PI / 180);
-        double currentRadian = imu.getBotHeading();
-        while(targetRadians != currentRadian){
-            driveTrain.drive(0, 0, (currentRadian - targetRadians)*.02);
-            currentRadian = imu.getBotHeading();
+        double targetRadians = Math.toRadians(degrees);
+        telemetry.addData("Error", -100000);
+        telemetry.update();
+        while(true){
+            double currentRadian = imu.getBotHeading();
+            double error = targetRadians - currentRadian;
+
+            if (Math.abs(error) < RADIAN_THRESHOLD) {
+                break;
+            }
+            driveTrain.drive(0, 0, (error)*.08);
+            telemetry.addData("Error", error);
+            telemetry.update();
         }
         driveTrain.stopDriveTrain();
     }
