@@ -11,17 +11,17 @@ public class BigTriangle extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         robot.initRobot(hardwareMap);
         waitForStart();
-        robot.autoManager.driveCm(.5, 10, 10, 10);
+       // robot.autoManager.driveCm(.5, 10, 10, true, 10);
 
-        //robot.autoManager.driveCm(.35,100,100, true,20);//Forward 150cm
-        //robot.autoManager.driveCm(.35,100,100, true,20);//Forward 150cm
+        robot.autoManager.driveCm(.5,75,75, true,20);//Forward 150cm
+     // robot.autoManager.driveCm(.35,100,100, true,20);//Forward 150cm
 
-        //robot.autoManager.strafeToPosition(100, .35, 15, telemetry);//right 150cm
-        //robot.autoManager.strafeToPosition(-200, .35, 15, telemetry);// left 300cm
+        robot.autoManager.strafeToPosition(100, .5, 15, telemetry);//right 150cm
+        robot.autoManager.strafeToPosition(-200, .5, 15, telemetry);// left 300cm
         //robot.autoManager.strafeToPosition(100, .35, 15,  telemetry);//Back to center (150cm)
-        //robot.autoManager.driveCm(.35,-100 ,-100, false,20);//Back to Return position
+        robot.autoManager.driveCm(.25,-50 ,-100, false,20);//Back to Return position
 
-        robot.autoManager.turnDegrees(360);
+       // robot.autoManager.turnDegrees(360);
 
 
     }
