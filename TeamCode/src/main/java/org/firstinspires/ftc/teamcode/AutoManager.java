@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.robotSystems.VisionSubsystem;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
 import static java.lang.Thread.sleep;
 
@@ -147,13 +148,20 @@ public class AutoManager {
         }
     }
 
-    public void turnDegrees(int degrees){
-        imu.resetYaw();
-        double targetRadians = degrees * (Math.PI / 180);
-        double currentRadian = imu.getBotHeading();
-        while(targetRadians != currentRadian){
-            driveTrain.drive(0, 0, (currentRadian - targetRadians)*.02);
-            currentRadian = imu.getBotHeading();
+        public void turnDegrees(int degrees) {
+            imu.resetYaw();
+            double targetRad = Math.toRadians(degrees);
+            double tolerance = .02;
+            double kP = 1.2;
+
+        while (true) {
+                double currentRad = imu.getBotHeading();
+                double error = anglewrap(targetRad - currentRad);
+
+                if (Math.abs(error) < tolerance) break;
+
+                double zRotation = Range.clip(error * kP, -0.4, 0.4);
+                driveTrain.drive(0, 0, zRotation);
         }
         driveTrain.stopDriveTrain();
     }
@@ -166,5 +174,7 @@ public class AutoManager {
         }
         return radians;
     }
+
+
 }
 
