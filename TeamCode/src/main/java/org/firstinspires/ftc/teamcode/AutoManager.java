@@ -19,6 +19,8 @@ public class AutoManager {
     static final double WHEEL_DIAMETER_CM = 10.4;     // GoBilda Mecanum Wheels
     static final double DRIVE_GEAR_REDUCTION = 1.0;    // No External Gearing.
 
+    static final double RADIAN_THRESHOLD = .4;         //Aprox. 5 degrees
+
     static final double COUNTS_PER_CM = (COUNTS_PER_MOTOR_GOBILDA * DRIVE_GEAR_REDUCTION) /
             (WHEEL_DIAMETER_CM * 3.1415);
 
@@ -147,6 +149,7 @@ public class AutoManager {
             driveTrain.autoAlignment();
         }
     }
+
 
         public void turnDegrees(int degrees) {
             imu.resetYaw();

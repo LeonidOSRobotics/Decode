@@ -35,6 +35,5 @@ public class Robot {
         autoManager = new AutoManager(driveTrain, hardware, vision, imu);
         intake = new IntakeSubsystem(hardware);
 
-
     }
 }
