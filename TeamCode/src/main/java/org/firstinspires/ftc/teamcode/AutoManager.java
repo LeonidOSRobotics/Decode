@@ -157,10 +157,9 @@ public class AutoManager {
             double targetRad = Math.toRadians(degrees);
             double currentRad = imu.getBotHeading();
             double integralSum = 0;
-            double tolerance = .02;
-            double kP = .05;
-            double kD = .05;
-            double kI = .05;
+            double kP = .45;
+            double kD = 0.12;
+            double kI = 0.54 ;
             double kF = 10;
 
             while (true)
