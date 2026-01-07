@@ -14,6 +14,7 @@ import static java.lang.Thread.sleep;
 
 public class AutoManager {
     private ElapsedTime runtime = new ElapsedTime();
+    private double lastError = 0;
 
     static final double COUNTS_PER_MOTOR_GOBILDA = 537.7;  // GoBilda Motor Encoder
     static final double WHEEL_DIAMETER_CM = 10.4;     // GoBilda Mecanum Wheels
@@ -154,17 +155,28 @@ public class AutoManager {
         public void turnDegrees(int degrees) {
             imu.resetYaw();
             double targetRad = Math.toRadians(degrees);
+            double currentRad = imu.getBotHeading();
+            double integralSum = 0;
             double tolerance = .02;
             double kP = 1.2;
+            double kD = 1.2;
+            double kI = 1.2;
+            double kF = 10;
 
-        while (true) {
-                double currentRad = imu.getBotHeading();
+            while (true)
+            {
+
+                currentRad = imu.getBotHeading();
                 double error = anglewrap(targetRad - currentRad);
-
-                if (Math.abs(error) < tolerance) break;
-
-                double zRotation = Range.clip(error * kP, -0.4, 0.4);
-                driveTrain.drive(0, 0, zRotation);
+                integralSum += error * runtime.seconds();
+                double derivative = (error - lastError) / runtime.seconds();
+                lastError = error;
+                runtime.reset();
+                double output = (error * kP) + (derivative * kD) + (integralSum * kI) + (targetRad * kF);
+                driveTrain.drive(0, 0, output);
+                if (Math.abs(error) < RADIAN_THRESHOLD) {
+                    break;
+                }
         }
         driveTrain.stopDriveTrain();
     }
