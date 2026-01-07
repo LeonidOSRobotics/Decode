@@ -21,7 +21,7 @@ public class BigTriangle extends LinearOpMode {
         //robot.autoManager.strafeToPosition(100, .35, 15,  telemetry);//Back to center (150cm)
         //robot.autoManager.driveCm(.35,-100 ,-100, false,20);//Back to Return position
 
-        robot.autoManager.turnDegrees(150, telemetry);
+        robot.autoManager.turnDegrees(150);
 
 
     }
