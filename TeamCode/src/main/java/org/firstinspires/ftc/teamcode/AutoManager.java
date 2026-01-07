@@ -158,9 +158,9 @@ public class AutoManager {
             double currentRad = imu.getBotHeading();
             double integralSum = 0;
             double tolerance = .02;
-            double kP = 1.2;
-            double kD = 1.2;
-            double kI = 1.2;
+            double kP = .05;
+            double kD = .05;
+            double kI = .05;
             double kF = 10;
 
             while (true)
