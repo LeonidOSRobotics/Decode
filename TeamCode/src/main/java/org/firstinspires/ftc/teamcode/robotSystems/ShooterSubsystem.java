@@ -6,9 +6,9 @@ public class ShooterSubsystem {
     public ShooterSubsystem(RobotHardware hardware) {
         this.hardware = hardware;
     }
-    public void powerOn(){
-        hardware.getShooterLeft().setPower(1);
-        hardware.getShooterRight().setPower(1);
+    public void powerShooter(double val){
+        hardware.getShooterLeft().setPower(val);
+        hardware.getShooterRight().setPower(val);
     }
 
     public void powerOff(){

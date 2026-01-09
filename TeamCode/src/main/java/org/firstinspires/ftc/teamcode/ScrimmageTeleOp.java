@@ -40,13 +40,10 @@ public class ScrimmageTeleOp extends LinearOpMode {
                 robot.driveTrain.fieldOrientedDrive(-gamepad1.left_stick_y, gamepad1.left_stick_x, -rotate);
             }
 
-            if (gamepad1.right_bumper){
-                robot.shooter.powerOn();
 
-            }
-            else {
-                robot.shooter.powerOff();
-            }
+                robot.shooter.powerShooter(gamepad2.left_trigger);
+
+
             if(gamepad1.start){
                 robot.imu.resetYaw();
             }
