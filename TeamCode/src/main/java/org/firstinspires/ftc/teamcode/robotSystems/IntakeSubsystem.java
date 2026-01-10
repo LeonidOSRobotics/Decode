@@ -10,5 +10,9 @@ public class IntakeSubsystem {
     public void powerOff(){
         hardware.getIntake().setPower(0);
     }
+
+    public void servoIntake(){hardware.getServo().setPosition(.8);}
+
+    public void servoLaunch(){hardware.getServo().setPosition(-.8);}
 }
 

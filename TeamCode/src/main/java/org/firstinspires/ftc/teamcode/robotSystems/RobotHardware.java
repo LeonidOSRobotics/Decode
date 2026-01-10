@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * This class is where we identify the physical components of the robot
@@ -31,6 +32,8 @@ public class RobotHardware {
     private RevBlinkinLedDriver blinkin = null;
     private DcMotor shooterLeft = null;
     private DcMotor shooterRight = null;
+   private Servo servo;
+
 
     private DcMotor intake = null;
 
@@ -52,7 +55,7 @@ public class RobotHardware {
 
         camera = hwMap.get(Limelight3A.class, "limelight");
         blinkin = hwMap.get(RevBlinkinLedDriver.class, "blinkin");
-
+        servo = hwMap.get(Servo.class, "servo" );
         shooterLeft = hwMap.get(DcMotor.class, "shooterLeft");
         shooterRight = hwMap.get(DcMotor.class, "shooterRight");
 
@@ -129,5 +132,9 @@ public class RobotHardware {
 
     public DcMotor getIntake() {
         return intake;
+    }
+
+    public Servo getServo() {
+        return servo;
     }
 }

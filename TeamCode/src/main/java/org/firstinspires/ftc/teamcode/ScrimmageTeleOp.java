@@ -54,5 +54,11 @@ public class ScrimmageTeleOp extends LinearOpMode {
                     robot.intake.powerOff();
                 }
             }
+
+        if(gamepad2.a){
+            robot.intake.servoLaunch();
+        }else{
+            robot.intake.servoIntake();
+        }
     }
 }
