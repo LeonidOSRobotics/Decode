@@ -42,6 +42,17 @@ public class ScrimmageTeleOp extends LinearOpMode {
 
 
                 robot.shooter.powerShooter(gamepad2.left_trigger);
+            if(gamepad2.a) {
+                robot.shooter.powerShooter(.2);
+            } else if (gamepad2.x) {
+                robot.shooter.powerShooter(.35);
+            }else if (gamepad2.y){
+                robot.shooter.powerShooter(.6);
+            }else if (gamepad2.b){
+                robot.shooter.powerShooter(.8);
+            }else{
+                robot.shooter.powerOff();
+            }
 
 
             if(gamepad1.start){
@@ -50,15 +61,22 @@ public class ScrimmageTeleOp extends LinearOpMode {
             if(gamepad1.a){
                 robot.intake.powerOn();
             }
+            else if(gamepad1.b){
+                robot.intake.reverse();
+            }
                 else{
                     robot.intake.powerOff();
                 }
+
+            if(gamepad2.dpad_up){
+                robot.intake.servoLaunch();
+            }else if (gamepad2.dpad_down){
+                robot.intake.servoIntake();
+            }else{
+                robot.intake.stopServo();
+            }
             }
 
-        if(gamepad2.a){
-            robot.intake.servoLaunch();
-        }else{
-            robot.intake.servoIntake();
-        }
+
     }
 }

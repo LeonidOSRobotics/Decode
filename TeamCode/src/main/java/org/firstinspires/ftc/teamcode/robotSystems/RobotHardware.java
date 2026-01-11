@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.robotSystems;
 
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -32,7 +33,7 @@ public class RobotHardware {
     private RevBlinkinLedDriver blinkin = null;
     private DcMotor shooterLeft = null;
     private DcMotor shooterRight = null;
-   private Servo servo;
+   private CRServo servo;
 
 
     private DcMotor intake = null;
@@ -55,7 +56,7 @@ public class RobotHardware {
 
         camera = hwMap.get(Limelight3A.class, "limelight");
         blinkin = hwMap.get(RevBlinkinLedDriver.class, "blinkin");
-        servo = hwMap.get(Servo.class, "servo" );
+        servo = hwMap.get(CRServo.class, "servo" );
         shooterLeft = hwMap.get(DcMotor.class, "shooterLeft");
         shooterRight = hwMap.get(DcMotor.class, "shooterRight");
 
@@ -134,7 +135,7 @@ public class RobotHardware {
         return intake;
     }
 
-    public Servo getServo() {
+    public CRServo getServo() {
         return servo;
     }
 }
