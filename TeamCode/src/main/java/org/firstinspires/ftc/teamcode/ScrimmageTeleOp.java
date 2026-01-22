@@ -46,9 +46,10 @@ public class ScrimmageTeleOp extends LinearOpMode {
                 robot.shooter.powerShooter(.2);
             } else if (gamepad2.x) {
                 robot.shooter.powerShooter(.35);
-            }else if (gamepad2.y){
+            }else if (gamepad2.y) {
                 robot.shooter.powerShooter(.6);
-            }else if (gamepad2.b){
+
+            } else if (gamepad2.b) {
                 robot.shooter.powerShooter(.8);
             }else{
                 robot.shooter.powerOff();
