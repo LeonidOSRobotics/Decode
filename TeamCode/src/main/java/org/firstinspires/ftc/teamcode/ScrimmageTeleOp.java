@@ -1,3 +1,6 @@
+//public void robotScoresAllThePoints(boolean score){
+  //  ok so like basically you need to pickup all the balls and score them}
+//}
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
