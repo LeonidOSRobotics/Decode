@@ -7,6 +7,7 @@ import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
@@ -34,8 +35,8 @@ public class RobotHardware {
     private DcMotor leftBack = null;
     private DcMotor rightBack = null;
     private RevBlinkinLedDriver blinkin = null;
-    private DcMotor shooterLeft = null;
-    private DcMotor shooterRight = null;
+    private DcMotorEx shooterLeft = null;
+    private DcMotorEx shooterRight = null;
    private Servo pinwheelservo;
 
    private Servo leverarmservo;
@@ -67,8 +68,8 @@ public class RobotHardware {
         pinwheelservo = hwMap.get(Servo.class, "pinwheelservo" );
         leverarmservo = hwMap.get(Servo.class, "leverarm");
         colorsensor = hwMap.get(ColorSensor.class, "colorsensor");
-        shooterLeft = hwMap.get(DcMotor.class, "shooterLeft");
-        shooterRight = hwMap.get(DcMotor.class, "shooterRight");
+        shooterLeft = hwMap.get(DcMotorEx.class, "shooterLeft");
+        shooterRight = hwMap.get(DcMotorEx.class, "shooterRight");
 
         intake = hwMap.get(DcMotor.class, "intakeMotor");
 
@@ -85,6 +86,9 @@ public class RobotHardware {
 
         shooterLeft.setDirection(DcMotorSimple.Direction.FORWARD);
         shooterRight.setDirection(DcMotorSimple.Direction.REVERSE);
+
+        shooterLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        shooterRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         intake.setDirection(DcMotorSimple.Direction.FORWARD);
 
@@ -133,11 +137,11 @@ public class RobotHardware {
         return imu;
     }
 
-    public DcMotor getShooterLeft() {
+    public DcMotorEx getShooterLeft() {
         return shooterLeft;
     }
 
-    public DcMotor getShooterRight() {
+    public DcMotorEx getShooterRight() {
         return shooterRight;
     }
 

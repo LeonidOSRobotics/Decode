@@ -6,7 +6,16 @@ public class ShooterSubsystem {
     public ShooterSubsystem(RobotHardware hardware) {
         this.hardware = hardware;
     }
-    public void powerShooter(double val){
+
+    public void setVelocity(double velocity){
+        hardware.getShooterLeft().setVelocity(velocity);
+        hardware.getShooterRight().setVelocity(velocity);
+
+    }
+
+
+
+        public void powerShooter(double val){
         hardware.getShooterLeft().setPower(val);
         hardware.getShooterRight().setPower(val);
     }
@@ -17,8 +26,9 @@ public class ShooterSubsystem {
 
     }
 
+    }
 
 
-}
+
 
 
