@@ -1,8 +1,11 @@
 package org.firstinspires.ftc.teamcode.robotSystems;
 
+import android.graphics.Color;
+
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -33,7 +36,12 @@ public class RobotHardware {
     private RevBlinkinLedDriver blinkin = null;
     private DcMotor shooterLeft = null;
     private DcMotor shooterRight = null;
-   private CRServo servo;
+   private Servo pinwheelservo;
+
+   private Servo leverarmservo;
+
+   private ColorSensor colorsensor;
+
 
 
     private DcMotor intake = null;
@@ -56,7 +64,9 @@ public class RobotHardware {
 
         camera = hwMap.get(Limelight3A.class, "limelight");
         blinkin = hwMap.get(RevBlinkinLedDriver.class, "blinkin");
-        servo = hwMap.get(CRServo.class, "servo" );
+        pinwheelservo = hwMap.get(Servo.class, "pinwheelservo" );
+        leverarmservo = hwMap.get(Servo.class, "leverarm");
+        colorsensor = hwMap.get(ColorSensor.class, "colorsensor");
         shooterLeft = hwMap.get(DcMotor.class, "shooterLeft");
         shooterRight = hwMap.get(DcMotor.class, "shooterRight");
 
@@ -135,7 +145,7 @@ public class RobotHardware {
         return intake;
     }
 
-    public CRServo getServo() {
-        return servo;
+    public Servo getServo() {
+        return pinwheelservo;
     }
 }
