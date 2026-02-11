@@ -13,12 +13,12 @@ public class IntakeSubsystem {
     public void reverse(){
         hardware.getIntake().setPower(-1);
     }
-    public void servoIntake(){hardware.getServo().setPower(-.13);}
+    //public void servoIntake(){hardware.getServo().setPower(-.13);}
 
-    public void servoLaunch(){hardware.getServo().setPower(.18);}
+    //public void servoLaunch(){hardware.getServo().setPower(.18);}
 
-    public void stopServo() {
-        hardware.getServo().setPower(0);
-    }
+    //public void stopServo() {
+        //hardware.getServo().setPower(0);
+    //}
 }
 
