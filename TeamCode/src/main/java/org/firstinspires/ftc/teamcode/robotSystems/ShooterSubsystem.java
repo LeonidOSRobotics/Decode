@@ -8,6 +8,8 @@ public class ShooterSubsystem {
     }
 
     public void setVelocity(double velocity){
+      // Converting the velocity to RPM
+        velocity = (velocity / 60) * .28;
         hardware.getShooterLeft().setVelocity(velocity);
         hardware.getShooterRight().setVelocity(velocity);
 

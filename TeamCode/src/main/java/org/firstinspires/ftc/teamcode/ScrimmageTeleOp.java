@@ -58,7 +58,7 @@ public class ScrimmageTeleOp extends LinearOpMode {
                 robot.shooter.powerOff();
             }
 */
-           robot.shooter.setVelocity();
+           robot.shooter.setVelocity(4200);
 
             if(gamepad1.start){
                 robot.imu.resetYaw();
@@ -72,7 +72,7 @@ public class ScrimmageTeleOp extends LinearOpMode {
                 else{
                     robot.intake.powerOff();
                 }
-
+/*
             if(gamepad2.dpad_up){
                 robot.intake.servoLaunch();
             }else if (gamepad2.dpad_down){
@@ -80,6 +80,8 @@ public class ScrimmageTeleOp extends LinearOpMode {
             }else{
                 robot.intake.stopServo();
             }
+
+ */
             }
 
 
