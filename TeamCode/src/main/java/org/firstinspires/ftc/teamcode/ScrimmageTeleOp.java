@@ -43,8 +43,8 @@ public class ScrimmageTeleOp extends LinearOpMode {
                 robot.driveTrain.fieldOrientedDrive(-gamepad1.left_stick_y, gamepad1.left_stick_x, -rotate);
             }
 
-
-                robot.shooter.powerShooter(gamepad2.left_trigger);
+// i got like hellla moenay
+            /*
             if(gamepad2.a) {
                 robot.shooter.powerShooter(.2);
             } else if (gamepad2.x) {
@@ -57,7 +57,8 @@ public class ScrimmageTeleOp extends LinearOpMode {
             }else{
                 robot.shooter.powerOff();
             }
-
+*/
+           robot.shooter.setVelocity();
 
             if(gamepad1.start){
                 robot.imu.resetYaw();
