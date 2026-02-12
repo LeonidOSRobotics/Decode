@@ -7,7 +7,9 @@ public class PinwheelSubsystem {
     PinwheelSlot[] heldArtifacts = {new PinwheelSlot(0),
                                     new PinwheelSlot(1),
                                     new PinwheelSlot(2)};
-    
+
+    private boolean isFull = false;
+
     private final int minNoBall = 0;
     private final int maxNoBall = 0;
     private final int minGreen = 3;
@@ -39,9 +41,12 @@ public class PinwheelSubsystem {
         }
         if(!heldArtifacts[currentIntakePos].getColor().equals("No Ball")){
             currentIntakePos = findClosest("No Ball");
+                isFull = allSlotsFull();
         }
 
     }
+
+
 
     public int getHue(){
         return hardware.getPinwheelSensor().argb();
@@ -84,9 +89,7 @@ public class PinwheelSubsystem {
         return true;
     }
 
-    public String getArtifactColor(){
 
-    }
 
 
     }
