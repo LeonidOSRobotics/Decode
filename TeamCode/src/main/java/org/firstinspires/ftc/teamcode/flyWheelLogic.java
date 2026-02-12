@@ -15,7 +15,7 @@ public class flyWheelLogic {
         IDLE,
         SPIN_UP,
         LAUNCH,
-        RESET_ARM
+        RESET_LEVERARM
     }
 
     private FlywheelState flywheelState;
