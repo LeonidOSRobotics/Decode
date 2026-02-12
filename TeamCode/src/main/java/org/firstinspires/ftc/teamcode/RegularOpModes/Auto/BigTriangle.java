@@ -1,21 +1,27 @@
-package org.firstinspires.ftc.teamcode.Autonomous;
+package org.firstinspires.ftc.teamcode.RegularOpModes.Auto;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.Robot;
 
-@Autonomous(name="Small Triangle Red", group="Robot")
-public class SmallTriangleRed extends LinearOpMode {
+@Autonomous(name="Big Triangle", group="Robot")
+public class BigTriangle extends LinearOpMode {
     Robot robot = new Robot();
+
     @Override
     public void runOpMode() throws InterruptedException {
         robot.initRobot(hardwareMap);
         waitForStart();
-        //robot.autoManager.strafeToPosition(25, .5, 15, telemetry);
-        robot.driveTrain.drive(0,.5,0);
+        robot.driveTrain.drive(.7,0,0);
         sleep(200);
         robot.driveTrain.stopDriveTrain();
+        robot.autoManager.driveCm(.65, 50, 50, true, 10);// ***BIG TRIANGLE***
+      //robot.autoManager.turnDegrees(180);
 
 
-    }}
+    }
+
+
+    
+}

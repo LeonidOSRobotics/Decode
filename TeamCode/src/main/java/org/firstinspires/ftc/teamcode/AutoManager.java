@@ -1,8 +1,7 @@
-package org.firstinspires.ftc.teamcode.Autonomous;
+package org.firstinspires.ftc.teamcode;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.robotSystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.robotSystems.ImuSubsystem;
-import org.firstinspires.ftc.teamcode.RobotHardware;
 import org.firstinspires.ftc.teamcode.robotSystems.VisionSubsystem;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
