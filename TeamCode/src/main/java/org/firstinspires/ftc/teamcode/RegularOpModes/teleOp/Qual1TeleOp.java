@@ -1,7 +1,9 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.RegularOpModes.teleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+import org.firstinspires.ftc.teamcode.Robot;
 
 
 /*
@@ -70,11 +72,11 @@ public class Qual1TeleOp extends LinearOpMode {
                 }
 
             if(gamepad2.dpad_up){
-                robot.intake.servoLaunch();
+                robot.intake.powerOn();
             }else if (gamepad2.dpad_down){
-                robot.intake.servoIntake();
+                robot.intake.reverse();
             }else{
-                robot.intake.stopServo();
+                robot.intake.powerOff();
             }
             }
 
