@@ -1,6 +1,3 @@
-//public void robotScoresAllThePoints(boolean score){
-  //  ok so like basically you need to pickup all the balls and score them}
-//}
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -12,7 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * organization system to build and also provides a template for future op modes
  */
 @TeleOp(name = "TeleOp", group = "Sensor")
-public class ScrimmageTeleOp extends LinearOpMode {
+public class Qual1TeleOp extends LinearOpMode {
     private Robot robot = new Robot();
 
 
@@ -43,8 +40,8 @@ public class ScrimmageTeleOp extends LinearOpMode {
                 robot.driveTrain.fieldOrientedDrive(-gamepad1.left_stick_y, gamepad1.left_stick_x, -rotate);
             }
 
-// i got like hellla moenay
-            /*
+
+                robot.shooter.powerShooter(gamepad2.left_trigger);
             if(gamepad2.a) {
                 robot.shooter.powerShooter(.2);
             } else if (gamepad2.x) {
@@ -57,8 +54,7 @@ public class ScrimmageTeleOp extends LinearOpMode {
             }else{
                 robot.shooter.powerOff();
             }
-*/
-           robot.shooter.setVelocity(4200);
+
 
             if(gamepad1.start){
                 robot.imu.resetYaw();
@@ -72,7 +68,7 @@ public class ScrimmageTeleOp extends LinearOpMode {
                 else{
                     robot.intake.powerOff();
                 }
-/*
+
             if(gamepad2.dpad_up){
                 robot.intake.servoLaunch();
             }else if (gamepad2.dpad_down){
@@ -80,8 +76,6 @@ public class ScrimmageTeleOp extends LinearOpMode {
             }else{
                 robot.intake.stopServo();
             }
-
- */
             }
 
 

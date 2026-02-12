@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.RegularOpModes.teleOp;
 
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.teamcode.Robot;
 import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 
 import java.util.Comparator;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @TeleOp(name="Omni Drive To AprilTag (LL3A)", group="Concept")
 @SuppressWarnings("unused")
-public class IntegratedVersion extends LinearOpMode {
+public class LimelightTest extends LinearOpMode {
 
     private static final double DESIRED_DISTANCE = 50.0;
     private static final double SPEED_GAIN  = 0.02;

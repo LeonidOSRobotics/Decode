@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
+
 import org.firstinspires.ftc.teamcode.robotSystems.*;
 
 /*
@@ -10,14 +11,14 @@ import org.firstinspires.ftc.teamcode.robotSystems.*;
 
 
 public class Robot {
-    RobotHardware hardware;
-    VisionSubsystem vision;
-    DriveSubsystem driveTrain;
-    LEDSubsystem LED;
-    ImuSubsystem imu;
-    ShooterSubsystem shooter;
-    AutoManager autoManager;
-    IntakeSubsystem intake;
+    public RobotHardware hardware;
+    public VisionSubsystem vision;
+    public DriveSubsystem driveTrain;
+    public LEDSubsystem LED;
+    public ImuSubsystem imu;
+    public ShooterSubsystem shooter;
+    public AutoManager autoManager;
+    public IntakeSubsystem intake;
 
 
 

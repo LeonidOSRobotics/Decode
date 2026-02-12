@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.robotSystems;
 
+import org.firstinspires.ftc.teamcode.RobotHardware;
+
 public class IntakeSubsystem {
     RobotHardware hardware;
 
