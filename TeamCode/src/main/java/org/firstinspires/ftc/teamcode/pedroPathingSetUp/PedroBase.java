@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.pedroPathingSetUp;
 
+import static org.firstinspires.ftc.teamcode.pedroPathingSetUp.PathState.*;
+
 import com.pedropathing.follower.Follower;
 import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -13,7 +15,7 @@ public abstract class PedroBase extends OpMode {
     public Follower follower;
     public Timer pathTimer, opModeTimer;
 
-    public PathState pathState;
+    public PathState pathState = DRIVE_STARTPOS_SHOOT_POS;
 
     // Force child classes to define these
     public abstract void buildPaths();

@@ -1,14 +1,17 @@
 package org.firstinspires.ftc.teamcode.pedroPathingSetUp.PedroAutos;
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.paths.PathChain;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 
 import org.firstinspires.ftc.teamcode.pedroPathingSetUp.AutoPositions;
 import org.firstinspires.ftc.teamcode.pedroPathingSetUp.PathState;
 import org.firstinspires.ftc.teamcode.pedroPathingSetUp.PedroBase;
 
+@Autonomous(name="Test Intergrations", group="Robot")
 public class TestPedroIntergration extends PedroBase {
     private PathChain driveStartPosShootPos, driveShootPosEndPos;
+
 
     public void buildPaths() {
         driveStartPosShootPos = follower.pathBuilder()
