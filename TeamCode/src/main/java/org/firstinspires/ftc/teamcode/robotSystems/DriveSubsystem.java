@@ -10,6 +10,7 @@ package org.firstinspires.ftc.teamcode.robotSystems;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.teamcode.RobotHardware;
 
 public class DriveSubsystem {
 
@@ -75,7 +76,7 @@ public class DriveSubsystem {
 
         // Second, rotate angle by the angle the robot is pointing
         theta = AngleUnit.normalizeRadians(theta -
-                hardware.imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
+                hardware.getImu().getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS));
 
         // Third, convert back to cartesian
         double newForward = r * Math.sin(theta);

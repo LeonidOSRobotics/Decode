@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.robotSystems;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.teamcode.RobotHardware;
 
 public class ImuSubsystem {
     RobotHardware hardware;

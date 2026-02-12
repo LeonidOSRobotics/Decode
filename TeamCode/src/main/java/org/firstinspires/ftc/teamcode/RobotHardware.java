@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.robotSystems;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.hardware.IMU;
-import com.qualcomm.robotcore.hardware.Servo;
 
 /**
  * This class is where we identify the physical components of the robot
@@ -23,7 +22,7 @@ import com.qualcomm.robotcore.hardware.Servo;
  */
 
 public class RobotHardware {
-    IMU imu = null;
+    private IMU imu = null;
     HardwareMap hwMap = null; //TODO Can we get rid of this variable, is it used outside the the constructor?
     private Limelight3A camera = null;
     private DcMotor leftFront = null;
@@ -138,4 +137,6 @@ public class RobotHardware {
     public CRServo getServo() {
         return servo;
     }
+
+
 }

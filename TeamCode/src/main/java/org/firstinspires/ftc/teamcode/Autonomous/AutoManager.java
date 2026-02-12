@@ -1,13 +1,12 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.Autonomous;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.robotSystems.DriveSubsystem;
 import org.firstinspires.ftc.teamcode.robotSystems.ImuSubsystem;
-import org.firstinspires.ftc.teamcode.robotSystems.RobotHardware;
+import org.firstinspires.ftc.teamcode.RobotHardware;
 import org.firstinspires.ftc.teamcode.robotSystems.VisionSubsystem;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
 
 import static java.lang.Thread.sleep;
 

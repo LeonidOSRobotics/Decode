@@ -1,7 +1,9 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.teleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+import org.firstinspires.ftc.teamcode.Robot;
 
 
 /*
@@ -9,7 +11,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * organization system to build and also provides a template for future op modes
  */
 @TeleOp(name = "TeleOp", group = "Sensor")
-public class ScrimmageTeleOp extends LinearOpMode {
+public class Qual1TeleOp extends LinearOpMode {
     private Robot robot = new Robot();
 
 

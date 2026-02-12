@@ -3,11 +3,8 @@ package org.firstinspires.ftc.teamcode.robotSystems;
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.LLResultTypes;
 
-import java.util.Comparator;
-import java.util.List;
 
-
-import com.qualcomm.robotcore.util.Range;
+import org.firstinspires.ftc.teamcode.RobotHardware;
 
 /*
  * This class subsystem is where the robot is told how to perform vision
