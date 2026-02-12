@@ -3,5 +3,9 @@ package org.firstinspires.ftc.teamcode.pedroPathingSetUp;
 public enum PathState {
     DRIVE_STARTPOS_SHOOT_POS,
     SHOOT_PRELOAD,
-    DRIVE_SHOOTPOS_ENDPOS
+    DRIVE_SHOOTPOS_ENDPOS,
+    IDLE,
+    INTAKE,
+    SPIN_UP,
+    LAUNCH,
 }
