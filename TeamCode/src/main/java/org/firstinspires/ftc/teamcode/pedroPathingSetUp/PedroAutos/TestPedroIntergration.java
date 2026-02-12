@@ -33,7 +33,6 @@ public class TestPedroIntergration extends PedroBase {
                 break;
             case SHOOT_PRELOAD:
                 //is follower done its path
-                // and check that 5 seconds has elapsed
                 if(!follower.isBusy() && pathTimer.getElapsedTimeSeconds() > 0.5){
                     telemetry.addLine("Done Path 1");
                     follower.followPath(driveShootPosEndPos, true);
