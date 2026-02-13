@@ -65,7 +65,7 @@ public class Qual2TeleOp extends LinearOpMode {
                 robot.pinwheel.shootBall();
                 robot.pinwheel.updatePinwheelPosition();
             }
-            
+
 
 
 

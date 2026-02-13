@@ -6,9 +6,6 @@ import org.firstinspires.ftc.teamcode.pedroPathingSetUp.PedroBase;
 public class SmallTriangle extends PedroBase {
     Robot robot = new Robot();
 
-    private double TARGET_FLYWHEEL_RPM = 4200;
-
-
     @Override
     public void buildPaths() {
 
@@ -16,25 +13,16 @@ public class SmallTriangle extends PedroBase {
 
     @Override
     public void statePathUpdate() {
-        switch(pathState){
-            case SPIN_UP:
-                if(robot.shooter.isUpToSpeed(TARGET_FLYWHEEL_RPM)){
-                   // if(currentPos.equals(SHOOTINGPOS)){
-                   //     setPathState(pathState.LAUNCH);
-                  //  }
-                }
-                break;
-            case LAUNCH:
-                //lifts Arm and ball shoots
-                setPathState(pathState.IDLE);
-                break;
-            case IDLE:
-                //Turn off intake
-               // if(robot.);
+        robot.shooter.setVelocity(4200);
+        //Drive Away from goal to shooting position
+        while (!robot.shooter.isUpToSpeed(4200)) {
+            robot.shooter.setVelocity(4200);
         }
-
-
+        for (int i = 0; i < 3; i++) {
+            robot.pinwheel.shootBall();
+            robot.pinwheel.updatePinwheelPosition();
+        }
     }
-
-
 }
+
+
