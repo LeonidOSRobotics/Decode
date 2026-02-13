@@ -19,6 +19,7 @@ public class Robot {
     public ShooterSubsystem shooter;
     public AutoManager autoManager;
     public IntakeSubsystem intake;
+    public PinwheelSubsystem pinwheel;
 
 
 
@@ -35,6 +36,7 @@ public class Robot {
         shooter = new ShooterSubsystem(hardware);
         autoManager = new AutoManager(driveTrain, hardware, vision, imu);
         intake = new IntakeSubsystem(hardware);
+        pinwheel = new PinwheelSubsystem(hardware);
 
     }
 }

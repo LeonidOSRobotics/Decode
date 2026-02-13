@@ -25,6 +25,7 @@ public class Qual2TeleOp extends LinearOpMode {
                 robot.LED.setRed();
             } else if (robot.pinwheel.allSlotsFull()) {
                 robot.LED.setLaunch();
+                robot.intake.powerOff();
             } else {
                 robot.LED.setOff();
             }
@@ -42,6 +43,21 @@ public class Qual2TeleOp extends LinearOpMode {
             if(gamepad1.start){
                 robot.imu.resetYaw();
             }
+
+            //if the pinwheel has no artifacts start the intake
+
+            //Each loop check for a ball in the pinwheel
+
+            //Launch
+                //Spinup
+                //Pinwheel shootBall
+
+            //Power Intake
+                //Maybe if the pinwheel has any empty slots start it
+                // except for when we want it to go in reverse
+
+
+
 
 
         }
