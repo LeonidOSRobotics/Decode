@@ -29,10 +29,11 @@ public class PinwheelSubsystem {
     }
 
     public void shootBall(){
-        hardware.getLeverArm().setPosition(loweredArm);
-        while (hardware.getLeverArm().getPosition() != loweredArm){
-        }
         hardware.getLeverArm().setPosition(raisedArm);
+        while (hardware.getLeverArm().getPosition() != raisedArm){
+        }
+        hardware.getLeverArm().setPosition(loweredArm);
+        currentIntakePos++;//TODO fix for overshoot
     }
 
     public void shootBall(String color){

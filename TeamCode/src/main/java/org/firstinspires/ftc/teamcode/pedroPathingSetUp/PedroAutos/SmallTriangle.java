@@ -19,9 +19,9 @@ public class SmallTriangle extends PedroBase {
         switch(pathState){
             case SPIN_UP:
                 if(robot.shooter.isUpToSpeed(TARGET_FLYWHEEL_RPM)){
-                    if(currentPos.equals(SHOOTINGPOS)){
-                        setPathState(pathState.LAUNCH);
-                    }
+                   // if(currentPos.equals(SHOOTINGPOS)){
+                   //     setPathState(pathState.LAUNCH);
+                  //  }
                 }
                 break;
             case LAUNCH:
@@ -30,7 +30,7 @@ public class SmallTriangle extends PedroBase {
                 break;
             case IDLE:
                 //Turn off intake
-                if(robot.);
+               // if(robot.);
         }
 
 

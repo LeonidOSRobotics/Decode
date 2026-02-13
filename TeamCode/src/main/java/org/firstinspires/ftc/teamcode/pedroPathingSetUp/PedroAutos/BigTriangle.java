@@ -17,7 +17,10 @@ public class BigTriangle extends PedroBase {
         while(!robot.shooter.isUpToSpeed(4200)){
             robot.shooter.setVelocity(4200);
         }
-        //Launch 3 balls (for loop, lift arm, lower arm, spin pinwheel and repeat)
+        for(int i = 0; i < 3; i++){
+            robot.pinwheel.shootBall();
+            robot.pinwheel.updatePinwheelPosition();
+        }
         //Park
     }
 }
