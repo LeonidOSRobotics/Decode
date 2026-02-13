@@ -14,19 +14,20 @@ public class ShooterSubsystem {
         velocity = (velocity / 60) * 28;
         hardware.getShooterLeft().setVelocity(velocity);
         hardware.getShooterRight().setVelocity(velocity);
-
     }
 
-    //todo Add in a range so it doesn't have to be exact value
     public boolean isUpToSpeed(double target){
-        target = (target/60) * 28;
-        return hardware.getShooterLeft().getVelocity() == target && hardware.getShooterRight().getVelocity() == target;
-
+        double threshold = 50; //Allows for the motor to be up to 50 rpm lower than needed
+        target = ((target-threshold)/60) * 28;
+        boolean leftMotor = hardware.getShooterLeft().getVelocity() > target;
+        boolean rightMotor = hardware.getShooterRight().getVelocity() > target;
+        return leftMotor && rightMotor;
     }
 
 
 
-        public void powerShooter(double val){
+
+    public void powerShooter(double val){
         hardware.getShooterLeft().setPower(val);
         hardware.getShooterRight().setPower(val);
     }

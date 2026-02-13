@@ -11,6 +11,9 @@ public class PinwheelSubsystem {
 
     private boolean isFull = false;
 
+    private final double loweredArm = 0;
+    private final double raisedArm = 0;
+
     private final int minNoBall = 0;
     private final int maxNoBall = 0;
     private final int minGreen = 3;
@@ -26,10 +29,16 @@ public class PinwheelSubsystem {
     }
 
     public void shootBall(){
-
+        hardware.getLeverArm().setPosition(loweredArm);
+        while (hardware.getLeverArm().getPosition() != loweredArm){
+        }
+        hardware.getLeverArm().setPosition(raisedArm);
     }
 
     public void shootBall(String color){
+        currentIntakePos = findClosest(color);
+        updatePinwheelPosition();
+        shootBall();
 
     }
 
