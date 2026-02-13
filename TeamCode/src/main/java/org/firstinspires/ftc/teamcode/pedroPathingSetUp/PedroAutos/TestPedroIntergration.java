@@ -15,15 +15,17 @@ public class TestPedroIntergration extends PedroBase {
 
     public void buildPaths() {
         driveStartPosShootPos = follower.pathBuilder()
-                .addPath(new BezierLine(AutoPositions.STARTPOSE.getPos(), AutoPositions.SHOOTPOSE.getPos()))
-                .setLinearHeadingInterpolation(AutoPositions.STARTPOSE.getHeading(), AutoPositions.SHOOTPOSE.getHeading())
+                .addPath(new BezierLine(AutoPositions.STARTPOSEBIGTRIANGLEBLUE.getPos(), AutoPositions.SHOOTPOSEBLUETEAMBIGTRIANGLE.getPos()))
+                .setLinearHeadingInterpolation(AutoPositions.STARTPOSEBIGTRIANGLEBLUE.getHeading(), AutoPositions.SHOOTPOSEBLUETEAMBIGTRIANGLE.getHeading())
                 .build();
         driveShootPosEndPos = follower.pathBuilder()
-                .addPath(new BezierLine(AutoPositions.SHOOTPOSE.getPos(), AutoPositions.ENDPOSE.getPos()))
-                .setLinearHeadingInterpolation(AutoPositions.SHOOTPOSE.getHeading(),AutoPositions.ENDPOSE.getHeading())
+                .addPath(new BezierLine(AutoPositions.SHOOTPOSEBLUETEAMBIGTRIANGLE.getPos(), AutoPositions.ENDPOSEBLUE.getPos()))
+                .setLinearHeadingInterpolation(AutoPositions.SHOOTPOSEBLUETEAMBIGTRIANGLE.getHeading(),AutoPositions.ENDPOSEBLUE.getHeading())
                 .build();
 
+
     }
+
 
     public void statePathUpdate() {
         switch(pathState){

@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Robot;
 
-@TeleOp(name = "Old TeleOp", group = "Sensor")
+@TeleOp(name = "TeleOp", group = "Sensor")
 public class Qual2TeleOp extends LinearOpMode {
     Robot robot = new Robot();
 
@@ -57,10 +57,10 @@ public class Qual2TeleOp extends LinearOpMode {
 
             //Launch
             if(gamepad2.a){
-                robot.shooter.setVelocity(4200);
+                robot.shooter.setVelocity(3800);
                 //Drive Away from goal to shooting position
-                while(!robot.shooter.isUpToSpeed(4200)){
-                    robot.shooter.setVelocity(4200);
+                while(!robot.shooter.isUpToSpeed(3800)){
+                    robot.shooter.setVelocity(3800);
                 }
                 robot.pinwheel.shootBall();
                 robot.pinwheel.updatePinwheelPosition();

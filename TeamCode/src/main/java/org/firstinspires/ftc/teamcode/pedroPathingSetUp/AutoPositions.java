@@ -3,9 +3,9 @@ package org.firstinspires.ftc.teamcode.pedroPathingSetUp;
 import com.pedropathing.geometry.Pose;
 
 public enum AutoPositions {
-    STARTPOSE(new Pose(21.003500583430576, 124.58, Math.toRadians(180))),
-    SHOOTPOSE(new Pose(40, 80.075845974326, Math.toRadians(180))),
-    ENDPOSE(new Pose(84.17736289381563, 94.78296382730456, Math.toRadians(45)));
+    STARTPOSEBIGTRIANGLEBLUE(new Pose(21.003500583430572, 124.67677946324388, Math.toRadians(144))),
+    SHOOTPOSEBLUETEAMBIGTRIANGLE(new Pose(71.91598599766631, 80.075845974326, Math.toRadians(144))),
+    ENDPOSEBLUE(new Pose(71.91598599766625, 58.13768961493584, Math.toRadians(144)));
 
 
 
