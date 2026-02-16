@@ -25,9 +25,9 @@ public class AutoPathing extends OpMode {
 
     PathState pathState;
 
-    private final Pose startPose = new Pose(21.003500583430576, 124.58, Math.toRadians(180));
-    private final Pose shootPose = new Pose(40, 80.075845974326, Math.toRadians(180));
-    private final Pose endPose = new Pose(84.17736289381563, 94.78296382730456, Math.toRadians(45));
+    private final Pose startPose = new Pose(21.003500583430572, 124.67677946324388, Math.toRadians(144));
+    private final Pose shootPose = new Pose(71.91598599766631, 80.075845974326, Math.toRadians(144));
+    private final Pose endPose = new Pose(71.91598599766625, 58.13768961493584, Math.toRadians(144));
 
     private PathChain driveStartPosShootPos, driveShootPosEndPos;
 
