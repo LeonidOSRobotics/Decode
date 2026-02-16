@@ -28,28 +28,7 @@ public class TestPedroIntergration extends PedroBase {
 
 
     public void statePathUpdate() {
-        switch(pathState){
-            case DRIVE_STARTPOS_SHOOT_POS:
-                follower.followPath(driveStartPosShootPos, true);
-                setPathState(PathState.SHOOT_PRELOAD); //reset timer and make new state
-                break;
-            case SHOOT_PRELOAD:
-                //is follower done its path
-                // and check that .5 seconds has elapsed
-                if(!follower.isBusy() && pathTimer.getElapsedTimeSeconds() > 0.5){
-                    telemetry.addLine("Done Path 1");
-                    follower.followPath(driveShootPosEndPos, true);
-                    setPathState(PathState.DRIVE_SHOOTPOS_ENDPOS);
-                    //transition to next state
-                }
-                break;
-            case DRIVE_SHOOTPOS_ENDPOS:
-                if(!follower.isBusy()){
-                    telemetry.addLine("Done all Paths");
-                }
-            default:
-                telemetry.addLine("No state command");
-                break;
-        }
+       follower.followPath(driveStartPosShootPos);
+        follower.followPath(driveShootPosEndPos);
     }
 }
