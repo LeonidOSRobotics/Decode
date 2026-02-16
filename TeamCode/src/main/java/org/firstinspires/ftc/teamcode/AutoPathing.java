@@ -25,9 +25,9 @@ public class AutoPathing extends OpMode {
 
     PathState pathState;
 
-    private final Pose startPose = new Pose(21.003500583430572, 124.67677946324388, Math.toRadians(144));
-    private final Pose shootPose = new Pose(71.91598599766631, 80.075845974326, Math.toRadians(144));
-    private final Pose endPose = new Pose(71.91598599766625, 58.13768961493584, Math.toRadians(144));
+    private final Pose startPose = new Pose(21.003500583430572, 124.67677946324388, Math.toRadians(144));//DONT CHANGE
+    private final Pose shootPose = new Pose(48.056, 95.104, Math.toRadians(144));
+    private final Pose endPose = new Pose(43.712, 95.630, Math.toRadians(150));
 
     private PathChain driveStartPosShootPos, driveShootPosEndPos;
 
@@ -47,12 +47,13 @@ public class AutoPathing extends OpMode {
             switch(pathState){
             case DRIVE_STARTPOS_SHOOT_POS:
                 follower.followPath(driveStartPosShootPos, true);
-              setPathState(PathState.SHOOT_PRELOAD); //reset timer and make new state
+              setPathState(PathState.SHOOT_PRELOAD);
+              pathTimer.resetTimer();//reset timer and make new state
                 break;
                 case SHOOT_PRELOAD:
                     //is follower done its path
                     // and check that 5 seconds has elapsed
-                    if(!follower.isBusy() && pathTimer.getElapsedTimeSeconds() > 0.5){
+                    if(!follower.isBusy() && pathTimer.getElapsedTimeSeconds() > 3){
                         telemetry.addLine("Done Path 1");
                         follower.followPath(driveShootPosEndPos, true);
                         setPathState(PathState.DRIVE_SHOOTPOS_ENDPOS);
