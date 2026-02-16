@@ -6,9 +6,7 @@ import com.pedropathing.follower.Follower;
 import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.AutoPathing;
 import org.firstinspires.ftc.teamcode.Robot;
-import org.firstinspires.ftc.teamcode.pedroPathingSetUp.Constants;
 
 public abstract class PedroBase extends OpMode {
 

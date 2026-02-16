@@ -8,11 +8,10 @@ import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.pedroPathingSetUp.AutoPositions;
 import org.firstinspires.ftc.teamcode.pedroPathingSetUp.Constants;
 
 @Autonomous //oops
-public class AutoPathing extends OpMode {
+public class BigTriangleRed extends OpMode {
     private Follower follower;
     private Timer pathTimer, opModetimer;
 
@@ -25,9 +24,10 @@ public class AutoPathing extends OpMode {
 
     PathState pathState;
 
-    private final Pose startPose = new Pose(24.700, 130.054, Math.toRadians(140));//DONT CHANGE
-    private final Pose shootPose = new Pose(51.585, 92.247, Math.toRadians(140));
-    private final Pose endPose = new Pose(29.909, 29.909, Math.toRadians(150));
+    private final Pose startPose = new Pose(119.50408401400234, 129.754, Math.toRadians(38));//DONT CHANGE
+    private final Pose shootPose = new Pose(96.616, 95.944, Math.toRadians(38));
+    private final Pose endPose = new Pose(112.615, 78.673, Math.toRadians(38));
+
 
     private PathChain driveStartPosShootPos, driveShootPosEndPos;
 
@@ -38,56 +38,58 @@ public class AutoPathing extends OpMode {
                 .build();
         driveShootPosEndPos = follower.pathBuilder()
                 .addPath(new BezierLine(shootPose, endPose))
-        .setLinearHeadingInterpolation(shootPose.getHeading(),endPose.getHeading())
+                .setLinearHeadingInterpolation(shootPose.getHeading(), endPose.getHeading())
                 .build();
 
     }
 
-        public void statePathUpdate() {
-            switch(pathState){
+    public void statePathUpdate() {
+        switch (pathState) {
             case DRIVE_STARTPOS_SHOOT_POS:
                 follower.followPath(driveStartPosShootPos, true);
-              setPathState(PathState.SHOOT_PRELOAD);
-              pathTimer.resetTimer();//reset timer and make new state
+                setPathState(PathState.SHOOT_PRELOAD);
+                // pathTimer.resetTimer();//reset timer and make new state
                 break;
-                case SHOOT_PRELOAD:
-                    //is follower done its path
-                    // and check that 5 seconds has elapsed
-                    if(!follower.isBusy() && pathTimer.getElapsedTimeSeconds() > 3){
-                        telemetry.addLine("Done Path 1");
-                        follower.followPath(driveShootPosEndPos, true);
-                        setPathState(PathState.DRIVE_SHOOTPOS_ENDPOS);
-                        //transition to next state
-                    }
-                    break;
-                case DRIVE_SHOOTPOS_ENDPOS:
-                    if(!follower.isBusy()){
-                        telemetry.addLine("Done all Paths");
-                    }
-                default:
-                    telemetry.addLine("No state command");
-                    break;
+            case SHOOT_PRELOAD:
+                //is follower done its path
+                // and check that 5 seconds has elapsed
+                if (!follower.isBusy() && pathTimer.getElapsedTimeSeconds() > 5) {
+                    telemetry.addLine("Done Path 1");
+                    follower.followPath(driveShootPosEndPos, true);
+                    setPathState(PathState.DRIVE_SHOOTPOS_ENDPOS);
+                    //transition to next state
+                }
+                break;
+            case DRIVE_SHOOTPOS_ENDPOS:
+                if (!follower.isBusy()) {
+                    telemetry.addLine("Done all Paths");
+                }
+            default:
+                telemetry.addLine("No state command");
+                break;
         }
     }
-public void setPathState(PathState newState){
+
+    public void setPathState(PathState newState) {
         pathState = newState;
         pathTimer.resetTimer();
 
 
-}
+    }
 
     @Override
     public void init() {
         pathState = PathState.DRIVE_STARTPOS_SHOOT_POS;
         pathTimer = new Timer();
-        opModetimer= new Timer();
+        opModetimer = new Timer();
         follower = Constants.createFollower(hardwareMap);
         // TODO add in any other init mechanisms
-                buildPaths();
-                follower.setPose(startPose);
+        buildPaths();
+        follower.setPose(startPose);
 
     }
-    public void start(){
+
+    public void start() {
         opModetimer.resetTimer();
         setPathState(pathState);
 
@@ -104,5 +106,3 @@ public void setPathState(PathState newState){
         telemetry.addData("Path Time", pathTimer.getElapsedTimeSeconds());
     }
 }
-
-
