@@ -48,7 +48,7 @@ public class BigTriangleRed extends OpMode {
             case DRIVE_STARTPOS_SHOOT_POS:
                 follower.followPath(driveStartPosShootPos, true);
                 setPathState(PathState.SHOOT_PRELOAD);
-                // pathTimer.resetTimer();//reset timer and make new state
+                pathTimer.resetTimer();//reset timer and make new state
                 break;
             case SHOOT_PRELOAD:
                 //is follower done its path
