@@ -1,6 +1,6 @@
-package org.firstinspires.ftc.teamcode;
-
+package org.firstinspires.ftc.teamcode.pedroPathingSetUp.PedroAutos;
 import com.pedropathing.follower.Follower;
+
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.PathChain;
@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.pedroPathingSetUp.Constants;
 
-@Autonomous //oops
-public class BigTriangleRed extends OpMode {
+@Autonomous(name="Small Triangle Red", group="Robot")
+public class SmallTriangleRed extends OpMode {
     private Follower follower;
     private Timer pathTimer, opModetimer;
 
@@ -24,9 +24,9 @@ public class BigTriangleRed extends OpMode {
 
     PathState pathState;
 
-    private final Pose startPose = new Pose(119.50408401400234, 129.754, Math.toRadians(38));//DONT CHANGE
-    private final Pose shootPose = new Pose(96.616, 95.944, Math.toRadians(38));
-    private final Pose endPose = new Pose(112.615, 78.673, Math.toRadians(38));
+    private final Pose startPose = new Pose(100.885, 8.569, Math.toRadians(90));//DONT CHANGE
+    private final Pose shootPose = new Pose(83.678, 11.930, Math.toRadians(69));
+    private final Pose endPose = new Pose(87.039, 43.519, Math.toRadians(90));
 
 
     private PathChain driveStartPosShootPos, driveShootPosEndPos;

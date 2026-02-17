@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.pedroPathingSetUp.PedroAutos;
 
 import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.BezierLine;
@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.pedroPathingSetUp.Constants;
 
-@Autonomous //oops
+@Autonomous(name="Big Triangle Blue", group="Robot")
 public class BigTriangleBlue extends OpMode {
     private Follower follower;
     private Timer pathTimer, opModetimer;
