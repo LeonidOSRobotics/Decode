@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.RegularOpModes.teleOp;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -10,6 +11,7 @@ import org.firstinspires.ftc.teamcode.Robot;
  * This class serves as a sample teleOp the both test the ability of the
  * organization system to build and also provides a template for future op modes
  */
+@Disabled
 @TeleOp(name = "Old TeleOp", group = "Sensor")
 public class Qual1TeleOp extends LinearOpMode {
     private Robot robot = new Robot();

@@ -65,6 +65,7 @@ public class RobotHardware {
 
         camera = hwMap.get(Limelight3A.class, "limelight");
         blinkin = hwMap.get(RevBlinkinLedDriver.class, "blinkin");
+
         pinwheelServo = hwMap.get(Servo.class, "pinwheelservo" );
         leverArm= hwMap.get(Servo.class, "leverarm");
         pinwheelSensor = hwMap.get(ColorSensor.class, "colorsensor");
@@ -157,7 +158,7 @@ public class RobotHardware {
         return leverArm;
     }
 
-    public ColorSensor getPinwheelSensor() {
+    public ColorSensor getColorSensor() {
         return pinwheelSensor;
     }
 

@@ -1,25 +1,21 @@
 package org.firstinspires.ftc.teamcode.robotSystems;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.PinwheelSlot;
 import org.firstinspires.ftc.teamcode.RobotHardware;
 
 public class PinwheelSubsystem {
     RobotHardware hardware;
     PinwheelSlot[] heldArtifacts = {new PinwheelSlot(0),
-                                    new PinwheelSlot(1),
-                                    new PinwheelSlot(2)};
+                                    new PinwheelSlot(0),
+                                    new PinwheelSlot(0)};
 
     private boolean isFull = false;
 
     private final double loweredArm = 0;
     private final double raisedArm = 0;
 
-    private final int minNoBall = 0;
-    private final int maxNoBall = 0;
-    private final int minGreen = 3;
-    private final int maxGreen = 4;
-    private final int minPurple = 1;
-    private final int maxPurple = 2;
+    private final int NoBall = 100;
 
     int currentIntakePos = 2;       //Options are 1, 2, and 3
 
@@ -33,7 +29,10 @@ public class PinwheelSubsystem {
         while (hardware.getLeverArm().getPosition() != raisedArm){
         }
         hardware.getLeverArm().setPosition(loweredArm);
-        currentIntakePos++;//TODO fix for overshoot
+        currentIntakePos++;
+        if(currentIntakePos == 3){
+            currentIntakePos = 0;//TODO Fix for angle wrapping
+        }
     }
 
     public void shootBall(String color){
@@ -43,24 +42,31 @@ public class PinwheelSubsystem {
 
     }
 
-    public void checkForBall(){
-        int hue = getHue();
-        if(hue >= minGreen && hue <= maxGreen){
-            heldArtifacts[currentIntakePos].setColor("Green");
-        }else if(hue >= minPurple && hue <= maxPurple){
-            heldArtifacts[currentIntakePos].setColor("Purple");
+    public void checkForBall(Telemetry telemetry){
+        int colorvalue = getGreen();
+        telemetry.addData("Value", colorvalue);
+        telemetry.addData("Current Location", heldArtifacts[currentIntakePos].getPosition() );
+        if(colorvalue < NoBall){
+            //heldArtifacts[currentIntakePos].setHasBall(true);
+
+            telemetry.addData("Has Ball", true );
         }
-        if(!heldArtifacts[currentIntakePos].getColor().equals("No Ball")){
-            currentIntakePos = findClosest("No Ball");
-                isFull = allSlotsFull();
+        if(heldArtifacts[currentIntakePos].hasBall()){
+            currentIntakePos++; //findClosest("No Ball");
+
+            if(currentIntakePos == 3){
+                currentIntakePos = 0;//TODO Fix for angle wrapping
+            }
+            telemetry.addData("New Location", heldArtifacts[currentIntakePos].getPosition() );
+
+            isFull = allSlotsFull();
         }
+        telemetry.update();
 
     }
 
-
-
-    public int getHue(){
-        return hardware.getPinwheelSensor().argb();
+    public int getGreen(){
+        return hardware.getColorSensor().green();
     }
 
     public void returnToCenter(){
@@ -83,7 +89,7 @@ public class PinwheelSubsystem {
     }
     public boolean allSlotsOpen(){
         for(PinwheelSlot slot: heldArtifacts){
-            if (!slot.getColor().equals("No Ball")){
+            if (!slot.hasBall()){
                 return false;
             }
         }
@@ -92,8 +98,8 @@ public class PinwheelSubsystem {
     }
 
     public boolean allSlotsFull(){
-        for(int i = 0; i < heldArtifacts.length; i++){
-            if (heldArtifacts[i].getColor().equals("No Ball")){
+        for (PinwheelSlot heldArtifact : heldArtifacts) {
+            if (!heldArtifact.hasBall()) {
                 return false;
             }
         }

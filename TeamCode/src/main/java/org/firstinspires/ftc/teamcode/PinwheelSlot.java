@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 public class PinwheelSlot {
     private double position;
-    private String color;
+    private boolean hasBall;
 
     private final double pinwheelIncrement=0.4/3;
 
@@ -14,16 +14,16 @@ public class PinwheelSlot {
         } else {
             this.position=pinwheelIncrement*2;
         }
-        this.color = "No Ball";
+        this.hasBall = false;
     }
 
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setHasBall(boolean hasBall) {
+        this.hasBall = hasBall;
     }
 
-    public String getColor() {
-        return color;
+    public boolean hasBall() {
+        return hasBall;
     }
 
     public double getPosition() {

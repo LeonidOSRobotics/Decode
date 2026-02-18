@@ -10,6 +10,8 @@ import org.firstinspires.ftc.teamcode.Robot;
 public class Qual2TeleOp extends LinearOpMode {
     Robot robot = new Robot();
 
+
+
     @Override
     public void runOpMode() throws InterruptedException {
         robot.initRobot(hardwareMap);
@@ -28,6 +30,17 @@ public class Qual2TeleOp extends LinearOpMode {
                 robot.intake.powerOff();
             } else {
                 robot.LED.setOff();
+            }
+
+            if(gamepad2.b){
+                robot.hardware.getPinwheelServo().setPosition(0);
+                sleep(2000);
+                robot.hardware.getPinwheelServo().setPosition(.5);
+                sleep(2000);
+                robot.hardware.getPinwheelServo().setPosition(1);
+                telemetry.addData("Servo Value", robot.hardware.getPinwheelServo().getPosition());
+                telemetry.update();
+
             }
 
             //Option for auto alignment or regular drive.
@@ -53,18 +66,9 @@ public class Qual2TeleOp extends LinearOpMode {
             }
 
             //Each loop check for a ball in the pinwheel
-            robot.pinwheel.checkForBall();
+            robot.pinwheel.checkForBall(telemetry);
+            //robot.pinwheel.updatePinwheelPosition();
 
-            //Launch
-            if(gamepad2.a){
-                robot.shooter.setVelocity(3800);
-                //Drive Away from goal to shooting position
-                while(!robot.shooter.isUpToSpeed(3800)){
-                    robot.shooter.setVelocity(3800);
-                }
-                robot.pinwheel.shootBall();
-                robot.pinwheel.updatePinwheelPosition();
-            }
 
 
 
