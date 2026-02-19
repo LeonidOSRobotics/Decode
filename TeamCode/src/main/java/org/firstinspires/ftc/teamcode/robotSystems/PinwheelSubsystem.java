@@ -21,7 +21,6 @@ public class PinwheelSubsystem {
 
     public PinwheelSubsystem(RobotHardware hardware) {
         this.hardware = hardware;
-
     }
 
     public void shootBall(){
@@ -76,7 +75,7 @@ public class PinwheelSubsystem {
         return hardware.getColorSensor().green();
     }
 
-    public void returnToCenter(){
+    public void MoveToCenter(){
         currentIntakePos = 0;
         updatePinwheelPosition();
     }
@@ -86,9 +85,9 @@ public class PinwheelSubsystem {
     }
 
     private int findClosest(String ballType){
-        if( currentIntakePos-1 != 0 && heldArtifacts[currentIntakePos-1].equals(ballType)){
+        if( currentIntakePos-1 != -1 && heldArtifacts[currentIntakePos-1].equals(ballType)){
             return currentIntakePos-1;
-        }else if(currentIntakePos+1 != 4 && heldArtifacts[currentIntakePos+1].equals(ballType)){
+        }else if(currentIntakePos+1 != 3 && heldArtifacts[currentIntakePos+1].equals(ballType)){
             return currentIntakePos+1;
         }else{
             return currentIntakePos;
