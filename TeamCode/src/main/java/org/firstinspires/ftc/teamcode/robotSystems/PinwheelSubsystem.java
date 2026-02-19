@@ -7,8 +7,8 @@ import org.firstinspires.ftc.teamcode.RobotHardware;
 public class PinwheelSubsystem {
     RobotHardware hardware;
     PinwheelSlot[] heldArtifacts = {new PinwheelSlot(0),
-                                    new PinwheelSlot(0),
-                                    new PinwheelSlot(0)};
+                                    new PinwheelSlot(1),
+                                    new PinwheelSlot(2)};
 
     private boolean isFull = false;
 
@@ -51,7 +51,7 @@ public class PinwheelSubsystem {
         telemetry.addData("Has Ball? ", hasBall );
 
         if(hasBall){
-            //heldArtifacts[currentIntakePos].setHasBall(true);
+            heldArtifacts[currentIntakePos].setHasBall(true);
             currentIntakePos++; //findClosest("No Ball");
 
             if(currentIntakePos == 3){

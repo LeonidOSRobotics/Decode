@@ -14,18 +14,20 @@ public class ColorSensor extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+        intakeTimer = new Timer();
         robot.initRobot(hardwareMap);
         intakeTimer.resetTimer();
-        robot.hardware.getPinwheelServo().setPosition(0);
+        robot.hardware.getPinwheelServo().setPosition(0.01);
         waitForStart();
 
         while (opModeIsActive()) {
 
 
 
-            if(intakeTimer.getElapsedTimeSeconds() > 1 && robot.pinwheel.checkForBall(telemetry)){
+            if(intakeTimer.getElapsedTimeSeconds() > 1.5 && robot.pinwheel.checkForBall(telemetry)){
                 intakeTimer.resetTimer();
             }
+            robot.pinwheel.updatePinwheelPosition();
 
         }
     }

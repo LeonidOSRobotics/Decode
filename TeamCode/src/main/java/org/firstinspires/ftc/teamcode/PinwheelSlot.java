@@ -4,15 +4,15 @@ public class PinwheelSlot {
     private final double position;
     private boolean hasBall;
 
-    private static final double pinwheelIncrement= .2/3;
+    private static final double pinwheelIncrement= .2/2.9;
 
     public PinwheelSlot(int position) {
         if (position== 0){
-            this.position=0;
+            this.position=0.01;
         } else if (position==1) {
-            this.position = pinwheelIncrement;
+            this.position = .01+ pinwheelIncrement;
         } else {
-            this.position=pinwheelIncrement*2;
+            this.position=.01+ pinwheelIncrement*2;
         }
         this.hasBall = false;
     }
