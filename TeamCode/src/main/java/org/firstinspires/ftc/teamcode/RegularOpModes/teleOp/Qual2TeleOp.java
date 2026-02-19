@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.robotSystems.PinwheelSubsystem;
 
 @TeleOp(name = "TeleOp", group = "Sensor")
 public class Qual2TeleOp extends LinearOpMode {
@@ -65,6 +66,11 @@ public class Qual2TeleOp extends LinearOpMode {
                 intakeTimer.resetTimer();
             }
             robot.pinwheel.updatePinwheelPosition();
+
+
+            if(gamepad1.right_bumper){
+                robot.pinwheel.shootBall();
+            }
 
 
         }

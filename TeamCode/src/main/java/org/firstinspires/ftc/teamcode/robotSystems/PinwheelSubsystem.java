@@ -4,6 +4,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.PinwheelSlot;
 import org.firstinspires.ftc.teamcode.RobotHardware;
 
+import com.pedropathing.util.Timer;
+
 public class PinwheelSubsystem {
     RobotHardware hardware;
     PinwheelSlot[] heldArtifacts = {new PinwheelSlot(6),
@@ -24,8 +26,10 @@ public class PinwheelSubsystem {
     }
 
     public void shootBall(){
+        Timer leverArmTimer = new Timer();
         hardware.getLeverArm().setPosition(raisedArm);
-        while (hardware.getLeverArm().getPosition() != raisedArm){
+        leverArmTimer.resetTimer();
+        while(leverArmTimer.getElapsedTimeSeconds() < 1){
         }
         hardware.getLeverArm().setPosition(loweredArm);
         currentIntakePos++;
@@ -45,7 +49,7 @@ public class PinwheelSubsystem {
 
 
             int colorvalue = getGreen();
-            boolean hasBall = colorvalue > NoBall;
+            boolean hasBall = colorvalue < NoBall;
             telemetry.addData("Value", colorvalue);
             telemetry.addData("Current Location based on Position", currentIntakePos * PinwheelSlot.pinwheelIncrement);
             telemetry.addData("Current Intake Pos Number", currentIntakePos * PinwheelSlot.pinwheelIncrement);
