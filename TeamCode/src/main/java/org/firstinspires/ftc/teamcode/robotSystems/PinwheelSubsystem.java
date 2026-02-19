@@ -17,7 +17,7 @@ public class PinwheelSubsystem {
 
     private final int NoBall = 100;
 
-    int currentIntakePos = 2;       //Options are 1, 2, and 3
+    int currentIntakePos = 0;       //Options are 1, 2, and 3
 
     public PinwheelSubsystem(RobotHardware hardware) {
         this.hardware = hardware;
@@ -42,26 +42,33 @@ public class PinwheelSubsystem {
 
     }
 
-    public void checkForBall(Telemetry telemetry){
-        int colorvalue = getGreen();
-        telemetry.addData("Value", colorvalue);
-        telemetry.addData("Current Location", heldArtifacts[currentIntakePos].getPosition() );
-        if(colorvalue < NoBall){
-            //heldArtifacts[currentIntakePos].setHasBall(true);
+    public boolean checkForBall(Telemetry telemetry){
 
-            telemetry.addData("Has Ball", true );
-        }
-        if(heldArtifacts[currentIntakePos].hasBall()){
+        int colorvalue = getGreen();
+        boolean hasBall = colorvalue < NoBall;
+        telemetry.addData("Value", colorvalue);
+        telemetry.addData("Current Location based on Position", heldArtifacts[currentIntakePos].getPosition());
+        telemetry.addData("Current Intake Pos Number", currentIntakePos);
+        telemetry.addData("Has Ball? ", hasBall );
+
+        if(hasBall){
+            //heldArtifacts[currentIntakePos].setHasBall(true);
             currentIntakePos++; //findClosest("No Ball");
 
             if(currentIntakePos == 3){
                 currentIntakePos = 0;//TODO Fix for angle wrapping
             }
-            telemetry.addData("New Location", heldArtifacts[currentIntakePos].getPosition() );
 
-            isFull = allSlotsFull();
         }
+
+        telemetry.addData("New Location", heldArtifacts[currentIntakePos].getPosition() );
+        isFull = allSlotsFull();
+        for(int i = 0; i< heldArtifacts.length; i++){
+            telemetry.addData("Slot" + i + " Has a Ball:", heldArtifacts[currentIntakePos].hasBall());
+        }
+
         telemetry.update();
+        return hasBall;
 
     }
 
@@ -70,7 +77,7 @@ public class PinwheelSubsystem {
     }
 
     public void returnToCenter(){
-        currentIntakePos = 2;
+        currentIntakePos = 0;
         updatePinwheelPosition();
     }
 

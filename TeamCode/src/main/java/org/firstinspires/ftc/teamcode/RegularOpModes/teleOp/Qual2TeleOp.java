@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.RegularOpModes.teleOp;
 
 
+import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -9,12 +10,14 @@ import org.firstinspires.ftc.teamcode.Robot;
 @TeleOp(name = "TeleOp", group = "Sensor")
 public class Qual2TeleOp extends LinearOpMode {
     Robot robot = new Robot();
+    private Timer intakeTimer;
 
 
 
     @Override
     public void runOpMode() throws InterruptedException {
         robot.initRobot(hardwareMap);
+        intakeTimer.resetTimer();
 
         waitForStart();
         while (opModeIsActive()) {
@@ -66,13 +69,10 @@ public class Qual2TeleOp extends LinearOpMode {
             }
 
             //Each loop check for a ball in the pinwheel
-            robot.pinwheel.checkForBall(telemetry);
+            if(intakeTimer.getElapsedTimeSeconds() > 1 && robot.pinwheel.checkForBall(telemetry)){
+                intakeTimer.resetTimer();
+            }
             //robot.pinwheel.updatePinwheelPosition();
-
-
-
-
-
 
 
         }

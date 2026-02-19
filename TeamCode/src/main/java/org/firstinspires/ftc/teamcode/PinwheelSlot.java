@@ -1,10 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
 public class PinwheelSlot {
-    private double position;
+    private final double position;
     private boolean hasBall;
 
-    private final double pinwheelIncrement=0.4/3;
+    private static final double pinwheelIncrement= .2/3;
 
     public PinwheelSlot(int position) {
         if (position== 0){
