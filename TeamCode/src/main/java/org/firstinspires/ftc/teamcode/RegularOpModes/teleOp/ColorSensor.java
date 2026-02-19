@@ -17,13 +17,23 @@ public class ColorSensor extends LinearOpMode {
         intakeTimer = new Timer();
         robot.initRobot(hardwareMap);
         intakeTimer.resetTimer();
-        robot.hardware.getPinwheelServo().setPosition(0.01);
+        robot.hardware.getPinwheelServo().setPosition(0.01 + .225/3 * 6);
         waitForStart();
 
         while (opModeIsActive()) {
 
+           /* for(double i = 0.01; i<=1; i += (0.225/3) ) {
+                robot.hardware.getPinwheelServo().setPosition(i);
+                telemetry.addData("Position", i);
+                telemetry.update();
+                intakeTimer.resetTimer();
+                while(intakeTimer.getElapsedTimeSeconds() < 2){
 
-
+                }
+            }
+*/
+            telemetry.addData("Value", robot.hardware.getColorSensor().green());
+            telemetry.update();
             if(intakeTimer.getElapsedTimeSeconds() > 1.5 && robot.pinwheel.checkForBall(telemetry)){
                 intakeTimer.resetTimer();
             }

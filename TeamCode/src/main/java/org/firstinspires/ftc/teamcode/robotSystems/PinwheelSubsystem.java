@@ -6,18 +6,18 @@ import org.firstinspires.ftc.teamcode.RobotHardware;
 
 public class PinwheelSubsystem {
     RobotHardware hardware;
-    PinwheelSlot[] heldArtifacts = {new PinwheelSlot(0),
-                                    new PinwheelSlot(1),
-                                    new PinwheelSlot(2)};
+    PinwheelSlot[] heldArtifacts = {new PinwheelSlot(6),
+                                    new PinwheelSlot(7),
+                                    new PinwheelSlot(8)};
 
     private boolean isFull = false;
 
     private final double loweredArm = 0;
     private final double raisedArm = 0;
 
-    private final int NoBall = 100;
+    private final int NoBall = 110;
 
-    int currentIntakePos = 0;       //Options are 1, 2, and 3
+    int currentIntakePos = 6;       //Starts at 6 with is in the middle of the wheel
 
     public PinwheelSubsystem(RobotHardware hardware) {
         this.hardware = hardware;
@@ -43,30 +43,29 @@ public class PinwheelSubsystem {
 
     public boolean checkForBall(Telemetry telemetry){
 
-        int colorvalue = getGreen();
-        boolean hasBall = colorvalue < NoBall;
-        telemetry.addData("Value", colorvalue);
-        telemetry.addData("Current Location based on Position", heldArtifacts[currentIntakePos].getPosition());
-        telemetry.addData("Current Intake Pos Number", currentIntakePos);
-        telemetry.addData("Has Ball? ", hasBall );
 
-        if(hasBall){
-            heldArtifacts[currentIntakePos].setHasBall(true);
-            currentIntakePos++; //findClosest("No Ball");
+            int colorvalue = getGreen();
+            boolean hasBall = colorvalue > NoBall;
+            telemetry.addData("Value", colorvalue);
+            telemetry.addData("Current Location based on Position", currentIntakePos * PinwheelSlot.pinwheelIncrement);
+            telemetry.addData("Current Intake Pos Number", currentIntakePos * PinwheelSlot.pinwheelIncrement);
+            telemetry.addData("Has Ball? ", hasBall);
+        if(!allSlotsFull()) {
+            if (hasBall) {
+                heldArtifacts[currentIntakePos % 3].setHasBall(true);
+                currentIntakePos++; //findClosest("No Ball");
+                pinwheelWrap();
 
-            if(currentIntakePos == 3){
-                currentIntakePos = 0;//TODO Fix for angle wrapping
             }
 
-        }
+            telemetry.addData("New Location", currentIntakePos * PinwheelSlot.pinwheelIncrement);
+            isFull = allSlotsFull();
+            for (int i = 0; i < heldArtifacts.length; i++) {
+                telemetry.addData("Slot" + i + " Has a Ball:", currentIntakePos * PinwheelSlot.pinwheelIncrement);
+            }
 
-        telemetry.addData("New Location", heldArtifacts[currentIntakePos].getPosition() );
-        isFull = allSlotsFull();
-        for(int i = 0; i< heldArtifacts.length; i++){
-            telemetry.addData("Slot" + i + " Has a Ball:", heldArtifacts[currentIntakePos].hasBall());
+            telemetry.update();
         }
-
-        telemetry.update();
         return hasBall;
 
     }
@@ -76,18 +75,27 @@ public class PinwheelSubsystem {
     }
 
     public void MoveToCenter(){
-        currentIntakePos = 0;
-        updatePinwheelPosition();
+        currentIntakePos = 6;
+    }
+
+    public void pinwheelWrap(){
+        if((currentIntakePos > 13 || currentIntakePos < 1) && allSlotsOpen()){
+            MoveToCenter();
+        }else if(currentIntakePos > 13){
+            currentIntakePos = 11;
+        }else if( currentIntakePos < 1){
+            currentIntakePos = 3;
+        }
     }
 
     public void updatePinwheelPosition(){
-        hardware.getPinwheelServo().setPosition(heldArtifacts[currentIntakePos].getPosition());
+        hardware.getPinwheelServo().setPosition(0.01 + currentIntakePos * PinwheelSlot.pinwheelIncrement);
     }
 
     private int findClosest(String ballType){
-        if( currentIntakePos-1 != -1 && heldArtifacts[currentIntakePos-1].equals(ballType)){
+        if( currentIntakePos-1 != -1 && heldArtifacts[(currentIntakePos%3)-1].equals(ballType)){
             return currentIntakePos-1;
-        }else if(currentIntakePos+1 != 3 && heldArtifacts[currentIntakePos+1].equals(ballType)){
+        }else if(currentIntakePos+1 != 3 && heldArtifacts[(currentIntakePos%3)+1].equals(ballType)){
             return currentIntakePos+1;
         }else{
             return currentIntakePos;

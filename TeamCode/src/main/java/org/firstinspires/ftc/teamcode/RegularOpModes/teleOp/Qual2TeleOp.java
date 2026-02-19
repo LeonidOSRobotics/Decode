@@ -16,6 +16,7 @@ public class Qual2TeleOp extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
+        intakeTimer = new Timer();
         robot.initRobot(hardwareMap);
         intakeTimer.resetTimer();
 
@@ -69,10 +70,10 @@ public class Qual2TeleOp extends LinearOpMode {
             }
 
             //Each loop check for a ball in the pinwheel
-            if(intakeTimer.getElapsedTimeSeconds() > 1 && robot.pinwheel.checkForBall(telemetry)){
+            if(intakeTimer.getElapsedTimeSeconds() > 1.5 && robot.pinwheel.checkForBall(telemetry)){
                 intakeTimer.resetTimer();
             }
-            //robot.pinwheel.updatePinwheelPosition();
+            robot.pinwheel.updatePinwheelPosition();
 
 
         }
