@@ -64,12 +64,17 @@ public class Qual2TeleOp extends LinearOpMode {
             //Each loop check for a ball in the pinwheel
             if(intakeTimer.getElapsedTimeSeconds() > 1.5 && robot.pinwheel.checkForBall(telemetry)){
                 intakeTimer.resetTimer();
+                robot.pinwheel.updatePinwheelPosition();
             }
-            robot.pinwheel.updatePinwheelPosition();
+
 
 
             if(gamepad1.right_bumper){
                 robot.pinwheel.shootBall();
+            }
+
+            if(gamepad2.y){
+                robot.shooter.setVelocity(3800);
             }
 
 

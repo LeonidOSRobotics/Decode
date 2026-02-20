@@ -14,8 +14,8 @@ public class PinwheelSubsystem {
 
     private boolean isFull = false;
 
-    private final double loweredArm = 0;
-    private final double raisedArm = 0;
+    private final double loweredArm = .55;
+    private final double raisedArm = 0.1;
 
     private final int NoBall = 110;
 
@@ -29,12 +29,14 @@ public class PinwheelSubsystem {
         Timer leverArmTimer = new Timer();
         hardware.getLeverArm().setPosition(raisedArm);
         leverArmTimer.resetTimer();
-        while(leverArmTimer.getElapsedTimeSeconds() < 1){
+        while(leverArmTimer.getElapsedTimeSeconds() < 1.2){
         }
         hardware.getLeverArm().setPosition(loweredArm);
         currentIntakePos++;
         if(currentIntakePos == 3){
             currentIntakePos = 0;//TODO Fix for angle wrapping
+        }
+        while(leverArmTimer.getElapsedTimeSeconds() < 1.2){
         }
     }
 

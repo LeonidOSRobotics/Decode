@@ -7,7 +7,7 @@ public class PinwheelSlot {
     public static final double pinwheelIncrement= .225/3;
 
     public PinwheelSlot(int position) {
-        this.position= 0.01 + pinwheelIncrement * position;
+        this.position= 0.03 + pinwheelIncrement * position;
 
         this.hasBall = false;
     }

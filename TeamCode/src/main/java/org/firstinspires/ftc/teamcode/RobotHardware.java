@@ -67,9 +67,10 @@ public class RobotHardware {
         blinkin = hwMap.get(RevBlinkinLedDriver.class, "blinkin");
 
         pinwheelServo = hwMap.get(Servo.class, "pinwheelservo" );
-        pinwheelServo.setPosition(0.01 + .225/3 * 6);
+        pinwheelServo.setPosition(0.03 + .225/3 * 6);
 
         leverArm= hwMap.get(Servo.class, "leverarm");
+        leverArm.setPosition(0.55);
         pinwheelSensor = hwMap.get(ColorSensor.class, "colorsensor");
         shooterLeft = hwMap.get(DcMotorEx.class, "shooterLeft");
         shooterRight = hwMap.get(DcMotorEx.class, "shooterRight");
