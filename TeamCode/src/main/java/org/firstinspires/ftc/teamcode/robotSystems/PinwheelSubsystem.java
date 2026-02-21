@@ -32,10 +32,9 @@ public class PinwheelSubsystem {
         while(leverArmTimer.getElapsedTimeSeconds() < 1.2){
         }
         hardware.getLeverArm().setPosition(loweredArm);
+        heldArtifacts[(currentIntakePos%3)].setHasBall(false);
         currentIntakePos++;
-        if(currentIntakePos == 3){
-            currentIntakePos = 0;//TODO Fix for angle wrapping
-        }
+        pinwheelWrap();
         while(leverArmTimer.getElapsedTimeSeconds() < 1.2){
         }
     }

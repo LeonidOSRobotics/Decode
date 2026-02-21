@@ -43,6 +43,8 @@ public class RobotHardware {
 
    private ColorSensor pinwheelSensor;
 
+   private Servo hoodservo;
+
 
 
     private DcMotor intake = null;
@@ -72,8 +74,11 @@ public class RobotHardware {
         leverArm= hwMap.get(Servo.class, "leverarm");
         leverArm.setPosition(0.55);
         pinwheelSensor = hwMap.get(ColorSensor.class, "colorsensor");
+
         shooterLeft = hwMap.get(DcMotorEx.class, "shooterLeft");
         shooterRight = hwMap.get(DcMotorEx.class, "shooterRight");
+        hoodservo = hwMap.get(Servo.class, "HoodServo");
+        hoodservo.setPosition(0);
 
         intake = hwMap.get(DcMotor.class, "intakeMotor");
 
@@ -93,6 +98,7 @@ public class RobotHardware {
 
         shooterLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         shooterRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
         intake.setDirection(DcMotorSimple.Direction.FORWARD);
 
@@ -165,5 +171,7 @@ public class RobotHardware {
         return pinwheelSensor;
     }
 
-
+    public Servo getHoodservo() {
+        return hoodservo;
+    }
 }

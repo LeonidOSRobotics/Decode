@@ -32,7 +32,6 @@ public class Qual2TeleOp extends LinearOpMode {
                 robot.LED.setRed();
             } else if (robot.pinwheel.allSlotsFull()) {
                 robot.LED.setLaunch();
-                robot.intake.powerOff();
             } else {
                 robot.LED.setOff();
             }
@@ -55,12 +54,16 @@ public class Qual2TeleOp extends LinearOpMode {
 
             //Intake Code
             //if the pinwheel has no artifacts start the intake
-            if(gamepad1.b) {
-                robot.intake.reverse();
-            }
-            else if(!robot.pinwheel.allSlotsFull()){
+            if(gamepad1.a){
                 robot.intake.powerOn();
+            }else if(gamepad1.b) {
+                robot.intake.reverse();
+            } else if(!robot.pinwheel.allSlotsFull()){
+                robot.intake.powerOn();
+            }else{
+                robot.intake.powerOff();
             }
+
             //Each loop check for a ball in the pinwheel
             if(intakeTimer.getElapsedTimeSeconds() > 1.5 && robot.pinwheel.checkForBall(telemetry)){
                 intakeTimer.resetTimer();
@@ -69,12 +72,18 @@ public class Qual2TeleOp extends LinearOpMode {
 
 
 
-            if(gamepad1.right_bumper){
+            if(gamepad2.right_bumper){
                 robot.pinwheel.shootBall();
             }
 
             if(gamepad2.y){
                 robot.shooter.setVelocity(3800);
+            }
+
+            if(gamepad2.dpad_up){
+                robot.hardware.getHoodservo().setPosition(0);
+            }else if (gamepad2.dpad_down){
+                robot.hardware.getHoodservo().setPosition(.55);
             }
 
 
