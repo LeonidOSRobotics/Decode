@@ -65,10 +65,10 @@ public class Qual2TeleOp extends LinearOpMode {
             }
 
             //Each loop check for a ball in the pinwheel
-            if(intakeTimer.getElapsedTimeSeconds() > 1.5 && robot.pinwheel.checkForBall(telemetry)){
-                intakeTimer.resetTimer();
-                robot.pinwheel.updatePinwheelPosition();
-            }
+            //if(intakeTimer.getElapsedTimeSeconds() > 1.5 && robot.pinwheel.checkForBall(telemetry)){
+             //   intakeTimer.resetTimer();
+              //  robot.pinwheel.updatePinwheelPosition();
+            //}
 
 
 
@@ -81,9 +81,15 @@ public class Qual2TeleOp extends LinearOpMode {
             }
 
             if(gamepad2.dpad_up){
-                robot.hardware.getHoodservo().setPosition(0);
+                robot.hardware.getLeverArm().setPosition(0.5);
             }else if (gamepad2.dpad_down){
-                robot.hardware.getHoodservo().setPosition(.55);
+                robot.hardware.getLeverArm().setPosition(.95);
+            }
+
+            if(gamepad2.x){
+                robot.hardware.getHoodservo().setPosition(0.5);
+            }else if (gamepad2.b){
+                robot.hardware.getHoodservo().setPosition(.4);
             }
 
 

@@ -8,7 +8,7 @@ import com.pedropathing.util.Timer;
 
 public class PinwheelSubsystem {
     RobotHardware hardware;
-    PinwheelSlot[] heldArtifacts = {new PinwheelSlot(6),
+    PinwheelSlot[] heldArtifacts = {new PinwheelSlot(10),
                                     new PinwheelSlot(7),
                                     new PinwheelSlot(8)};
 
@@ -17,9 +17,9 @@ public class PinwheelSubsystem {
     private final double loweredArm = .55;
     private final double raisedArm = 0.1;
 
-    private final int NoBall = 110;
+    private final int NoBall = 95;
 
-    int currentIntakePos = 6;       //Starts at 6 with is in the middle of the wheel
+    int currentIntakePos = 10;       //Starts at 6 with is in the middle of the wheel
 
     public PinwheelSubsystem(RobotHardware hardware) {
         this.hardware = hardware;
@@ -50,7 +50,7 @@ public class PinwheelSubsystem {
 
 
             int colorvalue = getGreen();
-            boolean hasBall = colorvalue < NoBall;
+            boolean hasBall = colorvalue > NoBall;
             telemetry.addData("Value", colorvalue);
             telemetry.addData("Current Location based on Position", currentIntakePos * PinwheelSlot.pinwheelIncrement);
             telemetry.addData("Current Intake Pos Number", currentIntakePos * PinwheelSlot.pinwheelIncrement);
