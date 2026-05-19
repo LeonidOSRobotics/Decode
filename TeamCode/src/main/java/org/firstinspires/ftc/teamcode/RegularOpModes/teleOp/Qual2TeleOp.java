@@ -38,14 +38,9 @@ public class Qual2TeleOp extends LinearOpMode {
 
 
             //Driving Code
-            //Option for auto alignment or regular drive.
-            if (tagID != -1 && gamepad1.left_bumper) {
-                robot.driveTrain.autoAlignment();
-            }
-            else {
-                double rotate = gamepad1.left_trigger - gamepad1.right_trigger;
-                robot.driveTrain.fieldOrientedDrive(-gamepad1.left_stick_y, gamepad1.left_stick_x, -rotate);
-            }
+            double rotate = gamepad1.left_trigger - gamepad1.right_trigger;
+            robot.driveTrain.fieldOrientedDrive(-gamepad1.left_stick_y, gamepad1.left_stick_x, -rotate);
+
             //Resetting the robot's orientation
             if(gamepad1.start){
                 robot.imu.resetYaw();
@@ -58,17 +53,9 @@ public class Qual2TeleOp extends LinearOpMode {
                 robot.intake.powerOn();
             }else if(gamepad1.b) {
                 robot.intake.reverse();
-            } else if(!robot.pinwheel.allSlotsFull()){
-                robot.intake.powerOn();
             }else{
                 robot.intake.powerOff();
             }
-
-            //Each loop check for a ball in the pinwheel
-            //if(intakeTimer.getElapsedTimeSeconds() > 1.5 && robot.pinwheel.checkForBall(telemetry)){
-             //   intakeTimer.resetTimer();
-              //  robot.pinwheel.updatePinwheelPosition();
-            //}
 
 
 
@@ -78,15 +65,12 @@ public class Qual2TeleOp extends LinearOpMode {
 
             if(gamepad2.y){
                 robot.shooter.setVelocity(3800);
+            }else if(gamepad2.x){
+                robot.shooter.setVelocity(0);
             }
 
-            if(gamepad2.dpad_up){
-                robot.hardware.getLeverArm().setPosition(0.5);
-            }else if (gamepad2.dpad_down){
-                robot.hardware.getLeverArm().setPosition(.95);
-            }
 
-            if(gamepad2.x){
+            if(gamepad2.a){
                 robot.hardware.getHoodservo().setPosition(0.5);
             }else if (gamepad2.b){
                 robot.hardware.getHoodservo().setPosition(.4);
