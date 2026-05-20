@@ -71,7 +71,7 @@ public class Qual2TeleOp extends LinearOpMode {
 
 
             if(gamepad2.a){
-                robot.hardware.getHoodservo().setPosition(0.5);
+                robot.hardware.getHoodservo().setPosition(0.65);
             }else if (gamepad2.b){
                 robot.hardware.getHoodservo().setPosition(.4);
             }

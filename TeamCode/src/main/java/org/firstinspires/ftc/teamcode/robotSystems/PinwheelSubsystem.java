@@ -14,7 +14,7 @@ public class PinwheelSubsystem {
 
     private boolean isFull = false;
 
-    private final double loweredArm = .55;
+    private final double loweredArm = .95;
     private final double raisedArm = 0.1;
 
     private final int NoBall = 95;
