@@ -24,62 +24,35 @@ public class BigTriangleRed extends OpMode {
 
     PathState pathState;
 
-    private final Pose startPose = new Pose(119.50408401400234, 129.754, Math.toRadians(38));//DONT CHANGE
-    private final Pose shootPose = new Pose(96.616, 95.944, Math.toRadians(38));
-    private final Pose endPose = new Pose(112.615, 78.673, Math.toRadians(90));
+    private final Pose startPose = new Pose(31.226, 8.476, Math.toRadians(90));//DONT CHANGE
+    private final Pose endPose = new Pose(31.226, 36.953, Math.toRadians(90));
 
 
     private PathChain driveStartPosShootPos, driveShootPosEndPos;
 
     public void buildPaths() {
         driveStartPosShootPos = follower.pathBuilder()
-                .addPath(new BezierLine(startPose, shootPose))
-                .setLinearHeadingInterpolation(startPose.getHeading(), shootPose.getHeading())
-                .build();
-        driveShootPosEndPos = follower.pathBuilder()
-                .addPath(new BezierLine(shootPose, endPose))
-                .setLinearHeadingInterpolation(shootPose.getHeading(), endPose.getHeading())
+                .addPath(new BezierLine(startPose, endPose))
+                .setLinearHeadingInterpolation(startPose.getHeading(), endPose.getHeading())
                 .build();
 
     }
 
-    public void statePathUpdate() {
-        switch (pathState) {
-            case DRIVE_STARTPOS_SHOOT_POS:
-                follower.followPath(driveStartPosShootPos, true);
-                setPathState(PathState.SHOOT_PRELOAD);
-                pathTimer.resetTimer();//reset timer and make new state
-                break;
-            case SHOOT_PRELOAD:
-                //is follower done its path
-                // and check that 5 seconds has elapsed
-                if (!follower.isBusy() && pathTimer.getElapsedTimeSeconds() > 5) {
-                    telemetry.addLine("Done Path 1");
-                    follower.followPath(driveShootPosEndPos, true);
-                    setPathState(PathState.DRIVE_SHOOTPOS_ENDPOS);
-                    //transition to next state
-                }
-                break;
-            case DRIVE_SHOOTPOS_ENDPOS:
-                if (!follower.isBusy()) {
-                    telemetry.addLine("Done all Paths");
-                }
-            default:
-                telemetry.addLine("No state command");
-                break;
-        }
-    }
+    /*    public void statePathUpdate() {
+         follower.followPath(driveStartPosShootPos);
+         }
+     }
 
-    public void setPathState(PathState newState) {
-        pathState = newState;
-        pathTimer.resetTimer();
+  public void setPathState(PathState newState) {
+         pathState = newState;
+         pathTimer.resetTimer();
 
 
-    }
-
+     }
+ */
     @Override
     public void init() {
-        pathState = PathState.DRIVE_STARTPOS_SHOOT_POS;
+       // pathState = PathState.DRIVE_STARTPOS_SHOOT_POS;
         pathTimer = new Timer();
         opModetimer = new Timer();
         follower = Constants.createFollower(hardwareMap);
@@ -91,18 +64,18 @@ public class BigTriangleRed extends OpMode {
 
     public void start() {
         opModetimer.resetTimer();
-        setPathState(pathState);
+       // setPathState(pathState);
 
     }
 
     @Override
     public void loop() {
         follower.update();
-        statePathUpdate();
-        telemetry.addData("path state", pathState.toString());
+        follower.followPath(driveStartPosShootPos);
+      //  telemetry.addData("path state", pathState.toString());
         telemetry.addData("x", follower.getPose().getX());
         telemetry.addData("y", follower.getPose().getY());
         telemetry.addData("heading", follower.getPose().getHeading());
-        telemetry.addData("Path Time", pathTimer.getElapsedTimeSeconds());
+       // telemetry.addData("Path Time", pathTimer.getElapsedTimeSeconds());
     }
 }

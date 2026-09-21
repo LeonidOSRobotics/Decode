@@ -13,18 +13,18 @@ public abstract class PedroBase extends OpMode {
     public Follower follower;
     public Timer pathTimer, opModeTimer;
 
-    public PathState pathState = DRIVE_STARTPOS_SHOOT_POS;
+   // public PathState pathState = DRIVE_STARTPOS_SHOOT_POS;
 
     // Force child classes to define these
     public abstract void buildPaths();
     public abstract void statePathUpdate();
 
-    public void setPathState(PathState newState){
+   /* public void setPathState(PathState newState){
         pathState = newState;
         pathTimer.resetTimer();
 
 
-    }
+    }*/
 
     @Override
     public void init() {
@@ -40,7 +40,7 @@ public abstract class PedroBase extends OpMode {
     @Override
     public void start(){
         opModeTimer.resetTimer();
-        setPathState(pathState);
+        //setPathState(pathState);
     }
 
     @Override
@@ -48,10 +48,10 @@ public abstract class PedroBase extends OpMode {
         follower.update();
         statePathUpdate();
 
-        telemetry.addData("Path State", pathState);
+        //telemetry.addData("Path State", pathState);
         telemetry.addData("X", follower.getPose().getX());
         telemetry.addData("Y", follower.getPose().getY());
-        telemetry.addData("Heading", follower.getPose().getHeading());
+       telemetry.addData("Heading", follower.getPose().getHeading());
         telemetry.addData("Path Time", pathTimer.getElapsedTimeSeconds());
     }
 }
