@@ -1,6 +1,6 @@
-package org.firstinspires.ftc.teamcode.pedroPathingSetUp.PedroAutos;
-import com.pedropathing.follower.Follower;
+package org.firstinspires.ftc.teamcode.pedroPathing.PedroAutos;
 
+import com.pedropathing.follower.Follower;
 import com.pedropathing.geometry.BezierLine;
 import com.pedropathing.geometry.Pose;
 import com.pedropathing.paths.PathChain;
@@ -8,12 +8,14 @@ import com.pedropathing.util.Timer;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.pedroPathingSetUp.Constants;
+import org.firstinspires.ftc.teamcode.Robot;
+import org.firstinspires.ftc.teamcode.pedroPathing.setUp.Constants;
 
-@Autonomous(name="Small Triangle Red", group="Robot")
-public class SmallTriangleRed extends OpMode {
+@Autonomous(name="Big Triangle Blue", group="Robot")
+public class BigTriangleBlue extends OpMode {
     private Follower follower;
     private Timer pathTimer, opModetimer;
+    Robot robot = new Robot();
 
 
     public enum PathState {
@@ -24,10 +26,11 @@ public class SmallTriangleRed extends OpMode {
 
     PathState pathState;
 
-    private final Pose startPose = new Pose(100.885, 8.569, Math.toRadians(90));//DONT CHANGE
-    private final Pose shootPose = new Pose(83.678, 11.930, Math.toRadians(69));
-    private final Pose endPose = new Pose(87.039, 43.519, Math.toRadians(90));
+    private final Pose startPose = new Pose(24.700, 130.054, Math.toRadians(140));//DONT CHANGE
+    private final Pose shootPose = new Pose(51.585, 92.247, Math.toRadians(140));
+    private final Pose endPose = new Pose(29.909, 72.084, Math.toRadians(150));
 
+    private int ballsShot = 0;
 
     private PathChain driveStartPosShootPos, driveShootPosEndPos;
 
@@ -53,12 +56,16 @@ public class SmallTriangleRed extends OpMode {
             case SHOOT_PRELOAD:
                 //is follower done its path
                 // and check that 5 seconds has elapsed
-                if (!follower.isBusy() && pathTimer.getElapsedTimeSeconds() > 5) {
-                    telemetry.addLine("Done Path 1");
+                if (!follower.isBusy() && ballsShot < 2 && pathTimer.getElapsedTimeSeconds() > 3) {
+                    robot.pinwheel.shootBall();
+                    ballsShot += 1;
+                } else if (!follower.isBusy() && pathTimer.getElapsedTimeSeconds() > 3) {
+
                     follower.followPath(driveShootPosEndPos, true);
                     setPathState(PathState.DRIVE_SHOOTPOS_ENDPOS);
-                    //transition to next state
                 }
+                //transition to next state
+
                 break;
             case DRIVE_SHOOTPOS_ENDPOS:
                 if (!follower.isBusy()) {
@@ -106,3 +113,4 @@ public class SmallTriangleRed extends OpMode {
         telemetry.addData("Path Time", pathTimer.getElapsedTimeSeconds());
     }
 }
+
